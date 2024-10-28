@@ -23,7 +23,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
     // { logo: <FaUser size={20} />, text: "Profile", path: "/profile" },
     // { logo: <FaCogs size={20} />, text: "Settings", path: "/settings" },
     // { logo: <FaWallet size={20} />, text: "Accounts", path: "/accounts" },
-    { logo: <FaIdCard size={20} />, text: "KYC", path: "/kyc" }
+    // { logo: <FaIdCard size={20} />, text: "KYC", path: "/kyc" }
   ];
 
   return (
