@@ -40,6 +40,7 @@ import { Profile } from "./pages/ProfilePage";
 
 function App() {
   const user = useSelector((state) => state.ekzaUser);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const { pathname }  = useLocation();
   const isProtectedRoute = protectedRoutesArray.includes(pathname);
@@ -52,6 +53,13 @@ function App() {
       setTokenValid(false);
     }
   }, [tokenValid]);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      await getUserProfile(dispatch);
+    }
+    getProfile()
+  }, []);
 
   useEffect(() => {
     Aos.init({duration:1000});
