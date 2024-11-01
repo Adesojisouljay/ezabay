@@ -52,18 +52,18 @@ function App() {
     if (!isTokenValid(token)) {
       setTokenValid(false);
     }
-  }, [tokenValid]);
-
-  useEffect(() => {
-    const getProfile = async () => {
-      await getUserProfile(dispatch);
+    if (isTokenValid(token)) {
+      getProfile()
     }
-    getProfile()
-  }, []);
+  }, [tokenValid]);
 
   useEffect(() => {
     Aos.init({duration:1000});
   }, [])
+
+  const getProfile = async () => {
+    await getUserProfile(dispatch);
+  }
 
   return (
     <div className="app">
