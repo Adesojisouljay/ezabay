@@ -21,6 +21,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
 
   const user = useSelector((state) => state.ekzaUser.user);
   const global = useSelector((state) => state);
+  console.log(user)
 
   const [openList, setOpenList] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
@@ -180,7 +181,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
     <div>
         <div className={`fadded-container b-s-modal-overlay ${isOpen ? "open" : ""}`}>
       <div
-        className={`b-s-modal-overlay  ${isOpen ? "open" : ""}`}
+        className={`b-s-modal-overlay md  ${isOpen ? "open" : ""}`}
         onClick={onClose}
       >
         {" "}

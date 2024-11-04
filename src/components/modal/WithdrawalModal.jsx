@@ -16,6 +16,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
 
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
   const [openList, setOpenList] = useState(false)
+  const  [displaySearch , setDisplaySearch] = useState(false)
 
   useEffect(() => {
     handleGetFees(selectedAsset?.currency)
@@ -96,12 +97,12 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
     {/* <div className={`modal-overlay ${isOpen ? 'open' : ''}`}> */}
       <div className="modal testing">
         <span className="close-modal" onClick={onClose}>X</span>
-        <h2>Withdrawal</h2>
+        <h2 className='w-header'>Withdrawal</h2>
         {message && <p className='warning'>{message}</p>}
         {step === 1 && <div className="w-input-group">
 
           <div className='w-main'>
-            <div className='w-coin-select-wrapper'>
+            {/* <div className='w-coin-select-wrapper'>
               <div className="w-currency-select-wrap" onClick={handleOpencoinList}>
                 <img className="w-deposit-coin-image" src={selectedAsset.image} alt="" />
                 <span className='w-picker-currency'>{selectedAsset.currency}</span>
@@ -115,10 +116,28 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
                 openList={openList}
               />
               
+            </div> */}
+
+            <div className='d-coin-select-wrapper'>
+            <span>{selectedAsset?.currency}</span>
+            <div className="d-currency-select-wrap" onClick={handleOpencoinList}>
+              <img className="d-coin-wrap" src={selectedAsset?.image} alt="" />
+              <span className='d-picker-currency'>{selectedAsset?.currency}</span>
+              <RiArrowDownSFill  size={24}/>
+              <Dropdown 
+              user={user}
+              setCurrency={setSelectedAsset} 
+              handleOpencoinList={handleOpencoinList} 
+              openList={openList}
+              displaySearch={displaySearch} />
+
             </div>
+
+          </div>
           </div>
 
           {selectedAsset.depositAddress ? <>
+           <div className="w-input-group">
             <label htmlFor="recipient-account">Recipient Address:</label>
             <input
               className='w-input'
@@ -128,7 +147,12 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
               onChange={(e) => setTo(e.target.value)}
               id="recipient-account"
             />
+           </div>
+
+
+           <div className="w-A-input-group">
             <label htmlFor="withdraw-amount">Amount:</label>
+            <div className="wrap-input">
             <input
               className='w-input'
               type="number"
@@ -137,7 +161,17 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Enter amount"
             />
-            <span>Fee: {fee ? fee : (0.000)}({selectedAsset.symbol.toUpperCase()})</span>
+            <div className="max-wrap">
+               <span onClick={()=> setAmount(selectedAsset.balance)}>Max</span>
+            </div>
+            </div>
+            
+            <div className="wrap">
+              <span>Available Balance: {selectedAsset.balance} </span>
+             <span>Fee: {fee ? fee : (0.000)}({selectedAsset.symbol.toUpperCase()})</span>
+            </div>
+            </div>
+            
             {selectedAsset?.memo && <>
               <label htmlFor="memo">Memo:</label>
               <input

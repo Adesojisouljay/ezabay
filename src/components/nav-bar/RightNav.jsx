@@ -41,7 +41,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
           <div className="user-info-section">
             <div className="welcom-wrap"><span>Welcome</span><h4>{user?.username}</h4></div>
 
-            <h4>Email: {user?.email}</h4>
+            <span>Email: {user?.email}</span>
             {user?.kyc?.kycStatus === "Verified" ? <div className="verified-wrap"><span> {user?.kyc?.kycStatus} </span> <MdVerified size={20} color='green' /></div> :
             <div className="pending-wrap"><span> {user?.kyc?.kycStatus} </span> <MdPending size={20} color='orange' /></div>}
           </div>
@@ -66,7 +66,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
         </ul>
         <div className="logout-wrap" onClick={handleLogout}>
           <h3>Logout</h3>
-        <Link to="/"><FiLogOut size={23} className='bold-icon'/></Link>
+        <Link to="/"><FiLogOut   className='bold-icon'/></Link>
         </div>
 
 

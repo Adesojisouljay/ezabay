@@ -1,5 +1,17 @@
 @import "../mixins.scss";
 
+
+
+@include respond(phone) {
+  .display-none{
+    display: none;
+  }
+  
+  .display-block{
+    display: block;
+  }
+}
+
 .dashboard-container {
   background-image: url(../assets/black-background.png);
   background-size: cover;
@@ -180,15 +192,20 @@
 
 
 
+
+
 // ****************************************new********************************
 .dashboard-content-wrap{
   display: flex;
   align-items: center;
   gap: 20px;
   width: 100%;
-  
+  height: 300px;
   margin-top: 10px;
   margin-bottom: 20px;
+  @include respond(phone) {
+    height: 250px;
+  }
   
 }
 .max-height-more{
@@ -201,20 +218,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 50px;
+  // gap: 50px;
   width: 60%;
   height: 100%;
   padding: 30px;
   border-radius: 12px; 
-  // background: linear-gradient(
-  //   127deg,
-  //   hsla(0, 0%, 100%, 0.16) 17.35%,
-  //   hsla(0, 0%, 85%, 0.04) 76.2%
-  // );
   @include respond(phone) {
     width: 100%;
+    height: fit-content;
     padding: 10px;
     gap: 5px;
+    display: none;
   }
   @include respond(tab) {
     width: 100%;
@@ -226,9 +240,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   @include respond(phone) {
-    padding-top: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    // padding-top: 20px;
   }
 }
 .total-fait-wrap{
@@ -240,7 +256,7 @@
       font-size: 20px;
     }
     span{
-      font-size: 30px;
+      font-size: 22px;
       @include respond(phone) {
         font-size: 25px;
         font-weight: 600;
@@ -335,6 +351,9 @@
   justify-content: right;
   cursor: pointer;
   // margin-bottom: 20px;
+  @include respond(phone) {
+    display: none;
+  }
 }
 .margin-bottom-large {
   margin-bottom: 20px;
@@ -349,12 +368,12 @@
 
 .bal-btn-wrap {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px; 
-  margin-right: 20px;
+  // margin-right: 20px;
 
   @include respond(phone) {
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(5, 1fr); 
     margin-right: 0px;
   }
 }
@@ -362,8 +381,8 @@
 .bal-btn {
   display: flex;
   flex-direction: column;
-  padding: 6px 10px;
-  border-radius: 12px;
+  padding: 6px 0px;
+  border-radius: 8px;
   background: rgb(26, 39, 54);
   box-sizing: border-box;
   align-items: center;
@@ -396,7 +415,11 @@
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
-  
+  @include respond(phone) {
+    padding: 6px 1px;
+    background: inherit;
+    display: block !important;
+  }
   .bal-icon-wrap {
     width: 40px;
     height: 40px;
@@ -408,12 +431,10 @@
     margin-bottom: 5px;
   }
 
-  @include respond(phone) {
-    padding: 6px 1px;
-    background: inherit;
-  }
+  
 
   span {
+    font-size: 14px;
     @include respond(phone) {
       font-size: 12px;
       text-align: center;
@@ -453,24 +474,39 @@
     display: none;
     flex-direction: column;
     margin-top: 20px;
+    width: 100%;
+    &.display-block {
+      display: flex; 
+    }
   }
   @include respond(tab) {
-    display: none;
-    // flex-direction: column;
-    // margin-top: 20px;
+  
   }
 }
 .card-wrap {
   width: 100%;
   border-radius: 15px;
   padding: 2rem;
-  // background: linear-gradient(
-  //   127deg,
-  //   hsla(0, 0%, 100%, 0.16) 17.35%,
-  //   hsla(0, 0%, 85%, 0.04) 76.2%
-  // );
   @include respond(phone) {
     padding: 15px;
+  }
+
+
+  .wrap-asset-header{
+   @include respond(phone) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   }
+
+   .tab-wrap{
+    display: none;
+    @include respond(phone) {
+     display: block;
+     
+    }
+   }
+
   }
 }  
 
@@ -529,6 +565,14 @@
     gap: 5px;
   }
 }
+.card-component-wrap{
+  height: 190px;
+  overflow: scroll;
+  @include respond(phone) {
+    height: 120px;
+  }
+}
+
 
 .card-component-1 {
   display: flex;
@@ -547,9 +591,28 @@
     gap: 5px;
     img{
       width: 34px;
+      @include respond(phone) {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .asset-b,
+  .asset-v,
+  .asset-percent{
+    &.red{
+      color: red;
+    }
+    &.green{
+      color: green;
+    }
+    @include respond(phone) {
+      font-size: 14px;
     }
   }
 }
+
 .border-line{
   border-top: 1px solid;
   border-color: rgba(229, 229, 229, 0.1);
@@ -644,9 +707,46 @@
   border-radius: 0.5rem;
   background: rgb(29, 35, 43);
   @include respond(phone) {
-    width: 55%;
+    width: 55%; 
+  }
+
+  &.margin-out {
+    display: none;
+    @include respond(phone) {
+      display: flex;
+      margin: 0px;
+    }
+  }
+  &.tab-width {
+    @include respond(phone) {
+      width: 100%;
+    }
   }
 }
+
+
+
+.asset,
+.dashboard{
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(124 124 124);
+  border-radius: 4px;
+  margin-right: 10px;
+  @include respond(phone) {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+  &.activetab-1 {
+    background: linear-gradient(127deg, #41454a 17.35%, #242a31 76.2%);
+    color: #fff;
+  }
+}
+
+
 
 .coin-price,
 .transaction,
@@ -674,6 +774,7 @@
 
   &:hover {
     color: #dcdcdc;
+    padding-left: 3px;
   }
 
   &:last-child {
@@ -691,6 +792,8 @@
   width: fit-content;
   height: fit-content;
   margin: 12px 12px;
+ 
+  
 
   .search-bal-input {
     font-size: 14px;
@@ -714,11 +817,6 @@
       width: 90px;
     }
   }
-
-  // svg {
-  //   color: #ccc;
-  //   font-size: 24px;
-  // }
 }
 
 .display-area {
@@ -739,33 +837,3 @@
     display: block;
   }
 
-
-//////////////quotes
-  .dashboard-quotes-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    // background-color: #402222;
-    width: 400px;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .quote-img{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-  }
-  
-  .dashboard-quotes-section h2 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-  }
-  
-  .dashboard-quotes-section p {
-    font-size: 1.25rem;
-  }
-  

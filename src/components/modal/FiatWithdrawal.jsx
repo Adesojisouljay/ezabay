@@ -8,6 +8,7 @@ import { GeneralDropdown } from '../dropdown/GeneralDrpdpown';
 import { AddAccount } from './AddAccount';
 import './fiat-withdrawal.scss';
 
+
 export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
   const user = useSelector(state => state?.ekzaUser?.user);
   const userAccounts = user?.accounts
@@ -163,7 +164,7 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
   return (
     <div className={`fadded-container modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className={`modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
-      <div className="modal animate-slide-in animate-slide-in-mobile">
+      <div className="modal ">
         <span className="close-modal" onClick={onClose}>X</span>
         <h2>Fiat Withdrawal</h2>
         {user?.accounts?.length === 0 ? 
