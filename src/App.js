@@ -103,7 +103,7 @@ function App() {
             {/* <Route path="/crypto-news" element={<CryptoNews />} /> */}
             {/* <Route path="/crypto-news/:id" element={<SingleNewsPage />} /> */}
             {/* <Route path="/profile" element={<Profile />} /> */}
-          </Route>
+          </Route>f
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

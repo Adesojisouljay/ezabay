@@ -50,7 +50,7 @@
       .token-box {
           background-color: rgba(21, 31, 43, .4);
           border-radius: 8px;
-          padding: 20px;
+          padding: 15px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           transition: transform 0.3s ease;
           @include respond(phone) {
@@ -66,15 +66,15 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              margin-bottom: 10px;
+              margin-bottom: 7px;
 
               &:last-child {
                   margin-bottom: 0;
               }
 
               .token-image {
-                  width: 40px;
-                  height: 40px;
+                  width: 35px;
+                  height: 35px;
                   margin-right: 10px;
                   border-radius: 50%;
                   @include respond(phone) {
@@ -111,7 +111,7 @@
               }
 
               .token-price {
-                  font-size: 20px;
+                  font-size: 18px;
                   font-weight: bold;
                   @include respond(phone) {
                     font-size: 16px;
@@ -153,13 +153,13 @@
 
 @media (max-width: 768px) {
   .listed-token-container {
-      flex: 1 1 calc(50% - 20px);  // 2 boxes per row on tablet
+      flex: 1 1 calc(50% - 20px);  
   }
 }
 
 @media (max-width: 480px) {
   .listed-token-container {
-      flex: 1 1 100%;  // 1 box per row on mobile
+      flex: 1 1 100%;  
   }
 }
 

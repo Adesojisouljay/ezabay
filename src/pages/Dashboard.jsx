@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaGift, FaRegEye } from "react-icons/fa";
-import { FaRegCircleQuestion } from "react-icons/fa6";
-// import { FaGift } from "react-icons/fa6";
 import { FaRegCopyright } from "react-icons/fa";
 import { DepositHiveModal } from "../components/modal/DepositHive";
-// import { fetchTransactionHistory } from "../api/transaction";
 import "./dashboard.scss";
 import { WithdrawalModal } from "../components/modal/WithdrawalModal";
 import Fiatdeposit from "../components/modal/Fiatdeposit";
@@ -15,39 +12,22 @@ import { FiatWithdrawalModal } from "../components/modal/FiatWithdrawal";
 import { setCurrency } from "../redux/currencySlice";
 import { usdPrice } from "../utils";
 import { ListedTokens } from "../components/listed-tokens/ListedTokens";
-import { TbTransferIn, TbTransferOut } from "react-icons/tb";
-import { HiCircleStack } from "react-icons/hi2";
-import hive from "../assets/hive-logo.png"
+import { HiCircleStack } from "react-icons/hi2"
 import { TransactionHistory } from "../components/transaction-history/TransactionHistory";
 import { FiSearch } from "react-icons/fi";
 import DBTransctionHistory from "../components/transaction-history/DBTransctionHistory";
-import usdt from "../assets/usdt.svg";
-import usdc from "../assets/usdc.svg";
 import { BuySell } from "../components/modal/BuySell";
 import { currenciesList } from "../vairables/protectedRoutes";
 import { GeneralDropdown } from "../components/dropdown/GeneralDrpdpown";
 
-const quotes = [
-  "The only way to do great work is to love what you do. - Kesolink",
-  "Success is not the key to happiness. Happiness is the key to success. - Souljay",
-  "In the middle of every difficulty lies opportunity. - Souljay",
-  "Your limitation—it's only your imagination.",
-  "Push yourself, because no one else is going to do it for you. - Kesolink",
-  "Great things never come from comfort zones. - Kesolink",
-  "Dream it. Wish it. Do it. - Souljay",
-  "Success doesn’t just find you. You have to go out and get it. - Kesolink"
-];
 
-const getRandomQuote = () => {
-  return quotes[Math.floor(Math.random() * quotes.length)];
-};
+
 
 export const Dashboard = () => {
   const user = useSelector((state) => state.ekzaUser.user);
   const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
   const dispatch = useDispatch();
   const assets = user?.assets || [];
-  console.log(assets)
   const isUsd = selectedCurrency === "USD";
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,27 +38,18 @@ export const Dashboard = () => {
   const [fiatTransferOpen, setFiatTransferOpen] = useState(false);
   const [transactionType, setTransactionType] = useState('buy');
   const [showBalance, setShowBalance] = useState(false);
-  const [activeTab, setActiveTab] = useState('coin-price'); // Default to 'coin-price'
+  const [activeTab, setActiveTab] = useState('coin-price');
   const [searchQueryCoinPrice, setSearchQueryCoinPrice] = useState('');
   const [showMore, setShowMore] = useState(false)
-  const [currentQuote, setCurrentQuote] = useState(getRandomQuote());
   const [buySellOpen, setBuySellOpen] = useState(false);
   const [openList, setOpenList] = useState(false);
-  // selected 
+  const [assetOpen, setAssetOpen] = useState(false)
+  const [toggle, setToggle] = useState(true)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentQuote(getRandomQuote());
-    }, 3000);
 
-    return () => clearInterval(interval);
-  }, []);
 
-  // useEffect(() => {
-  //   if (selectedCurrency) {
-  //     document.getElementById('currencySelect').value = selectedCurrency;
-  //   }
-  // }, [selectedCurrency]);
+
+  console.log(toggle)
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
 };
@@ -99,6 +70,9 @@ export const Dashboard = () => {
 
   const toggleBalanceView = () => {
     setShowBalance(!showBalance);
+  };
+  const handleOpenAsset = () => {
+    setAssetOpen(!assetOpen);
   };
 
   const openFiatDepositModal = () => {
@@ -141,15 +115,6 @@ export const Dashboard = () => {
     setFiatWithdrawalOpen(false);
   };
 
-  // const openBuySellModal = (type) => {
-  //   setTransactionType(type);
-  //   setBuySellOpen(true);
-  // };
-
-  // const closeBuySellModal = () => {
-  //   setBuySellOpen(false);
-  // };
-
   const openBuySellModal = (type) => {
     setTransactionType(type);
     setBuySellOpen(true);
@@ -173,15 +138,27 @@ export const Dashboard = () => {
     <div className="dashboard-container" onClick={actionToggleClose}>
       <div className="dashboard-content">
       <div className="greetings-container">
-        {/* <span className="welcome-greetings">Welcome to Ekzatrade😊! Where you Experience boundless crypto💰 transactions. Ekzatrade gives you the power to own you own crypto bank🏦</span> */}
       </div>
         <div className={`dashboard-content-wrap `}>
-          <div className="dashboard-main border-transparent">
+          <div className={`dashboard-main border-transparent   ${toggle ? "display-block" : ""}`}>
+          <div className="left-tabs-wrap margin-out">
+                <div
+                    className={`dashboard ${!toggle ? 'activetab-1' : ''}`}
+                    onClick={()=> setToggle(true)}
+                >
+                    Dashboard
+                </div>
+                <div
+                    className={`asset ${toggle  ? 'activetab-1' : ''}`}
+                    onClick={()=> setToggle(false)}
+                >
+                    Asset
+                </div>
+
+            </div>
             <div className="bal-top-wrap">
               <div className="total-fait-wrap">
                <div className="bal-text-select-wrap">
-                {/* <h2>Balance</h2>  */}
-
                 <GeneralDropdown
                   items={currenciesList}
                   setSelectedItem={handleCurrencyChange} 
@@ -200,64 +177,40 @@ export const Dashboard = () => {
                <FaRegEye className="show-balance" onClick={toggleBalanceView} />
               </div>
             </div>
-            <div className="bal-btn-wrap-main">
-            <div className={`show-more-wrap ${!showMore ? "margin-bottom-large" : "margin-bottom-small"}`}>
-              <span className="show-more" onClick={handleShowMore }>{!showMore ? "Show more" : "Show less"}</span>
-            </div>
+            <div className="bal-btn-wrap-main"> 
+
             <div className="bal-btn-wrap">
               <span className="bal-btn" onClick={() => openDepositModal(assets[0])}>
                 <div className="bal-icon-wrap">
                 <HiCircleStack />
                 </div>
-                <span>Receive Crypto</span>
+                <span>Receive </span>
               </span>
               <span className="bal-btn" onClick={openWithdrawalModal}>
                 <div className="bal-icon-wrap">
                 <HiCircleStack />
                 </div>
-                <span>Send Crypto</span>
+                <span>Send</span>
               </span>
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
                 <div className="bal-icon-wrap">
                 <HiCircleStack />
                 </div>
-                <span>Buy</span>
+                <span>Buy/Sell</span>
+              </span>
+              <span className="bal-btn" onClick={openFiatDepositModal}>
+                <div className="bal-icon-wrap">
+                <HiCircleStack />
+                </div>
+                <span>Deposit</span>
               </span>
 
-              <span className="bal-btn" onClick={()=> openBuySellModal("sell")}>
+              <span className="bal-btn" onClick={openFiatWithdrawalModal}>
                 <div className="bal-icon-wrap">
                 <HiCircleStack />
                 </div>
-                <span>Sell</span>
-              </span>
-          
-              <span className={`bal-btn-less ${!showMore ? "display-none" : "display-block"}`} onClick={openFiatTransferModal}>
-                <div className="bal-icon-wrap">
-                <HiCircleStack />
-                </div>
-                <span>Fiat Transfer</span>
-              </span>
-
-              <span className={`bal-btn-less ${!showMore ? "display-none" : "display-block"}`} onClick={openFiatDepositModal}>
-                <div className="bal-icon-wrap">
-                <HiCircleStack />
-                </div>
-                <span>Fiat Deposit</span>
-              </span>
-
-              <span className={`bal-btn-less ${!showMore ? "display-none" : "display-block"}`} onClick={openFiatWithdrawalModal}>
-                <div className="bal-icon-wrap">
-                <HiCircleStack />
-                </div>
-                <span>Fiat Withdrawal</span>
-              </span>
-
-              <span className={`bal-btn-less ${!showMore ? "display-none" : "display-block"}`} onClick={openFiatWithdrawalModal}>
-                <div className="bal-icon-wrap">
-                <HiCircleStack />
-                </div>
-                <span>Swap</span>
+                <span>Withdraw</span>
               </span>
 
             </div>
@@ -265,61 +218,69 @@ export const Dashboard = () => {
 
           </div>
 
-          {/* <div className="dashboard-quotes-section">
-              <h2>Motivational Quotes</h2>
-              <img className="quote-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROhuTdLL3qV-93rNnSS-4R2vVPcdVyKOJ6KA&s" alt="" />
-              <p>{currentQuote}</p>
-            </div> */}
-          <div className="portfolio-reward-wraper">
-          <div className="card-wrap border-transparent">
-            <div className="card-title-wrap">
-              <div className="card-icon">
-                <FaGift size={20} />
+ 
+           <div className={`portfolio-reward-wraper ${!toggle ? "display-block" : ""} `}>
+            <div className="card-wrap border-transparent">
+            
+              <div className="wrap-asset-header">
+              <div className="card-title-wrap">
+                <div className="card-icon">
+                  <FaGift size={20} />
+                </div>
+                <h4>Assets</h4>
               </div>
-              <h4>Assets</h4>
-            </div>
-              <p style={{marginBottom: 10}}>
-                Balance: {selectedCurrency === 'USD' 
-                    ? `$${user?.totalUsdValue?.toFixed(4)}`
-                    : `₦${user?.totalNairaValue?.toFixed(4)}`}
+               <div className="tab-wrap">
+              <div className="left-tabs-wrap tab-width">
+              <div
+                    className={`dashboard ${!toggle ? 'activetab-1' : ''}`}
+                    onClick={()=> setToggle(true)}
+                >
+                    Dashboard
+                </div>
+                <div
+                    className={`asset ${toggle  ? 'activetab-1' : ''}`}
+                    onClick={()=> setToggle(false)}
+                >
+                    Asset
+                </div>
+
+              </div>
+              </div>
+              </div>
+              <p style={{ marginBottom: 10 }}>
+                Balance:{" "}
+                {selectedCurrency === "USD"
+                  ? `$${user?.totalUsdValue?.toFixed(4)}`
+                  : `₦${user?.totalNairaValue?.toFixed(4)}`}
               </p>
-          
-            <div className="card-component-wrap">
-                {assets?.map(a => (
-                  <div className="  card-component-1 border-line" key={a.coinId}>
+
+              <div className="card-component-wrap">
+                {assets?.slice(0, 4).map((a) => (
+                  <div className="card-component-1 border-line" key={a.coinId}>
                     <div className="coin-wrap">
                       <img src={a.image} alt="" />
-                      <div className="">
+                      <div>
                         <h5>{a.symbol}</h5>
                       </div>
                     </div>
-                    <div> <span>{a.balance.toFixed(3)}</span> </div>
-                    <span>{a.nairaValue}</span>
-                    <div> <span style={{color: a.percentageChange < 0 ? "red" : "green"}}>{a.percentageChange}%</span> </div>
-                    {/* <div className="btn-deposit-withdrwal">
-                      <button>Withdraw</button>
-                      <button>Buy/Sell</button>
-                    </div> */}
-                </div>
-                ))}
-                {/* <div className={` ${!showMore ? "display-none":"card-component-1 border-line"}`}>
-                  <div className="coin-wrap">
-                    <img src={usdc} alt="" />
-                    <div className="">
-                      <h5>Usdc</h5>
+                    <div>
+                      <span className="asset-b">{a.balance.toFixed(3)}</span>
+                    </div>
+                    <span className="asset-v">{a.nairaValue.toFixed(2)}</span>
+                    <div>
+                      <span className={`asset-percent ${a.percentageChange < 0 ? "red" : "green"}`}
+                        style={{
+                          color: a.percentageChange < 0 ? "red" : "green",
+                        }}
+                      >
+                        {a.percentageChange}%
+                      </span>
                     </div>
                   </div>
-                  <div> <span>N0.00</span> </div>
-                  <span>0.00()</span>
-                  <div className="btn-deposit-withdrwal">
-                    <button>Withdraw</button>
-                    <button>Buy/Sell</button>
-                  </div>
-                </div> */}
-
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </div>
     <div className="bal-big-container-wrap">
         <div className="tabs-wrap">
@@ -335,12 +296,6 @@ export const Dashboard = () => {
                     onClick={() => handleTabClick('transaction')}
                 >
                     Transaction
-                </div>
-                <div
-                    className={`staked-asset ${activeTab === 'stake' ? 'activetab' : ''}`}
-                    onClick={() => handleTabClick('stake')}
-                >
-                    Stake Asset
                 </div>
             </div>
 
@@ -368,6 +323,7 @@ export const Dashboard = () => {
           <FaRegCopyright />
           <p>Ekzatrade, All Rights Reserved</p>
         </div>
+        
       </div>
       {isOpen && <DepositHiveModal
         isOpen={isOpen}
@@ -375,6 +331,7 @@ export const Dashboard = () => {
         onClose={closeDepositModal}
         user={user}
       />}
+
       {buySellOpen && (
         <BuySellModal
           isOpen={buySellOpen}

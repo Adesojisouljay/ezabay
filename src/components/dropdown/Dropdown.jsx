@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./dropdown.scss"
 
 export const Dropdown = (props) => {
-    const { user, handleOpencoinList, setCurrency, openList } = props;
+    const { user, handleOpencoinList, setCurrency, openList, displaySearch} = props;
     const [searchQuery, setSearchQuery] = useState("");
 
     const filteredAssets = user?.assets?.filter(asset =>
@@ -14,7 +14,7 @@ export const Dropdown = (props) => {
     <>
        {openList && 
        <input 
-            className='dropdown-search-input'
+            className={`dropdown-search-input ${displaySearch? "openlist": "openclose"} `}
             type="text"
             placeholder='Search coin'
             value={searchQuery}

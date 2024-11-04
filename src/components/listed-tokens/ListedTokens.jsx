@@ -3,6 +3,7 @@ import { fetchCryptoData } from '../../api/ekzat';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './listed-tokens.scss';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) => {
     const global = useSelector((state) => state);
@@ -68,10 +69,7 @@ export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) =
                             <div className="token-box">
                                 <div className="token-content-wrap">
                                     <img src={coin.image} alt={coin.name} className="token-image" />
-                                    {/* <Link to={`/coin/${coin.id}`} className="token-name-link">
-                                        {coin.name}
-                                    </Link> */}
-                                    <button className="buy-button" onClick={()=> openBuySellModal("buy")}>Buy</button>
+                                    <MdKeyboardArrowRight size={20} />
                                 </div>
                                 <div className="token-content-wrap">
                                 <Link to={`/coin/${coin.id}`} className="token-name-link">

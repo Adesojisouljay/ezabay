@@ -7,28 +7,23 @@
     cursor: pointer;
     font-size: 25px;
   }
+  .w-header{
+    margin-bottom: 10px;
+  }
   
   .w-input-group {
-    width: 70%;
-    padding: 10px;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 12px;
+    gap: 4px;
     @include respond(phone) {
       margin-bottom: 15px;
     }
-  }
-  
-  .w-input-group label {
-    display: block;
-  }
-
-  .w-input-group{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .w-input-group .w-input {
+    label{
+      font-size: 14px;
+    }
+    input{
     width: 100%;
     padding: 12px;
     margin-top: 5px;
@@ -37,16 +32,82 @@
     @include respond(phone) {
       padding: 12px;
     }
-  
+
+    }
+    .wrap{
+      display: flex;
+      justify-content: space-between;
+      span{
+        font-size: 12px;
+      }
+    }
   }
+
+  .w-A-input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 17px;
+    gap: 4px;
+    @include respond(phone) {
+      margin-bottom: 15px;
+    }
+    label{
+      font-size: 14px;
+    }
+    .wrap-input{
+      display: flex;
+      justify-content: space-between;
+      // background-color: rgb(29 35 43);
+      background-color: #fff;
+      border: 1px solid rgb(42 51 62);
+      border-radius: 8px;
+      input{
+        width: 100%;
+        padding: 12px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border-radius: 10px;
+        background-color: inherit;
+        @include respond(phone) {
+          padding: 12px;
+        }
+    
+        }
+        .max-wrap{
+          display: flex;
+          align-items: center;
+          gap: 3px;
+          font-size: 14px;
+          padding-right: 7px;
+          color: orange;
+          cursor: pointer;
+        }
+
+
+
+    }
+    
+    .wrap{
+      display: flex;
+      justify-content: space-between;
+      span{
+        font-size: 12px;
+      }
+    }
+  }
+  
+
   
   .withdraw-btn {
       padding: 10px 40px;
       border-radius: 10px;
       margin: 0 auto;
       color: #fff;
-      font-size: 18px;
-      background-color: rgb(23, 57, 102);
+      font-size: 16.5px;
+      background-color: rgb(28 100 224 );
+      // background-color: rgb(23, 57, 102);
+      // background: linear-gradient(127deg, hsla(0, 0%, 100%, 0.16) 17.35%, hsla(0, 0%, 85%, 0.04) 76.2%);
       cursor: pointer;
       @include respond(phone) {
         font-size: 14px;

@@ -4,6 +4,8 @@ import { addBankAccount, deleteBankAccount } from '../../api/ekzat';
 import { getUserProfile } from '../../api/profile';
 import { Loader } from '../../components/loader/Loader';
 import './add-account.scss';
+import { LuBadgeInfo } from 'react-icons/lu';
+import succesicon from "../../assets/succes.gif"
 
 export const AddAccount = ({ isOpen, onClose }) => {
   const user = useSelector(state => state.ekzaUser.user);
@@ -92,6 +94,7 @@ export const AddAccount = ({ isOpen, onClose }) => {
         <div className="account-form-container">
             {isSuccess ? (
             <div className="success-message">
+              <img src={succesicon} alt="" />
                 <h2>Bank Account added successfully!</h2>
                 <p>{message}</p>
                 <button className='account-button' onClick={onClose}>Go back</button>
@@ -101,9 +104,12 @@ export const AddAccount = ({ isOpen, onClose }) => {
             {loading && <Loader/>}
                 <form onSubmit={handleSubmit} className="bank-form">
                 <div className="account-form-group">
-                    <h1 style={{color: "green"}}>Add New Bank Account</h1>
+                    <h1 >Add New Bank Account</h1>
                     {message && <span className='warning'>{message}</span>}
-                    <h5 className='warning'>Please make sure you enter your details as accurately as possible</h5>
+                    <span className='wrap'>
+                    <LuBadgeInfo className='caution-icon' />
+                    <p className="warning-text">Note: Please make sure you enter your details as accurately as possible</p>
+                  </span>
                     <div className="account-form-group">
                         <label className="account-label">Account Number:</label>
                         <input

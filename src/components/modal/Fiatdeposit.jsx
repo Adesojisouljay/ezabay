@@ -5,20 +5,27 @@ import { getRandomMerchant, createNairaDepositRequest } from '../../api/ekzat';
 import { Loader } from '../loader/Loader';
 import { copyToClipboard } from '../../utils';
 import './fiat-deposit.scss';
+import { LuBadgeInfo } from "react-icons/lu";
 
 function Fiatdeposit({ isOpen, onClose }) {
   const [depositAmount, setDepositAmount] = useState("");
+  const [displayAmount, setDisplayAmount] = useState(""); // State for displaying "₦" symbol
   const [step, setStep] = useState(1);
   const [merchantInfo, setMerchantInfo] = useState({});
   const [loading, setLoading] = useState(false);
 
   const notAllowed = !depositAmount;
 
+  const handleInputChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    setDepositAmount(value);
+    setDisplayAmount(value ? `₦${value}` : ""); // Update display with "₦"
+  };
+
   const getMerchant = async () => {
     setLoading(true);
     try {
-      const merchantData = await getRandomMerchant();
-      if (!depositAmount || Number(depositAmount) < 1000 ) {
+      if (!depositAmount || Number(depositAmount) < 1000) {
         setLoading(false);
         toast.warning("Invalid amount, amount must be at least 1000", {
           style: {
@@ -30,6 +37,7 @@ function Fiatdeposit({ isOpen, onClose }) {
         });
         return;
       }
+      const merchantData = await getRandomMerchant();
       setMerchantInfo(merchantData);
       setStep(2);
       setLoading(false);
@@ -67,7 +75,7 @@ function Fiatdeposit({ isOpen, onClose }) {
   return (
     <div className={`fadded-container modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className={`modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
-      <div className="modal animate-slide-in animate-slide-in-mobile">
+      <div className="modal f-d-modal-start ">
         {loading && <Loader />}
         <div className="fiat-d-modal-content">
           {step === 1 && (
@@ -78,10 +86,10 @@ function Fiatdeposit({ isOpen, onClose }) {
                 <div className="fiat-deposit-amount">
                   <label>Enter amount to Deposit</label>
                   <input
-                    type="number"
-                    placeholder="Enter Amount"
-                    value={depositAmount}
-                    onChange={(e) => setDepositAmount(e.target.value)}
+                    type="text"
+                    placeholder="Min: ₦1000"
+                    value={displayAmount} 
+                    onChange={handleInputChange}
                   />
                 </div>
                 <button
@@ -98,49 +106,52 @@ function Fiatdeposit({ isOpen, onClose }) {
           {step === 2 && (
             <>
               <div className="bank-peer-wrap">
-                <span className="close-btn" onClick={() => { onClose(); setDepositAmount(""); setStep(1); }}>X</span>
+                <span className="close-btn" onClick={() => { onClose(); setDepositAmount(""); setDisplayAmount(""); setStep(1); }}>X</span>
                 <div className="deposit-head-text-wrap">
-                  <h2>Deposit Details</h2>
-                  <p className="warning-text">Note: Narration is very necessary for us to identify your deposit.</p>
+                  <span className='f-d-header'>Deposit Details</span>
+                  <span className='wrap'>
+                    <LuBadgeInfo className='caution-icon' />
+                    <p className="warning-text">Note: Narration is very necessary for us to identify your deposit.</p>
+                  </span>
                 </div>
                 <div className="bank-details-wrap">
                   <div className="detail-item">
-                    <h4>Amount:</h4>
+                    <span>Amount:</span>
                     <span className='copy-text-wrap'>
                       ₦{depositAmount}
                       <IoIosCopy onClick={() => copyToClipboard(`${depositAmount}`)} />
                     </span>
                   </div>
                   <div className="detail-item">
-                    <h4>Narration:</h4>
+                    <span>Narration:</span>
                     <span className='copy-text-wrap'>
                       {merchantInfo.narration}
                       <IoIosCopy onClick={() => copyToClipboard(merchantInfo.narration)} />
                     </span>
                   </div>
                   <div className="detail-item">
-                    <h4>Merchant:</h4>
+                    <span>Merchant:</span>
                     <span className='copy-text-wrap'>
                       {merchantInfo?.data.username}
                       <IoIosCopy onClick={() => copyToClipboard(merchantInfo?.data.username || '')} />
                     </span>
                   </div>
                   <div className="detail-item">
-                    <h4>Account Number:</h4>
+                    <span>Account Number:</span>
                     <span className='copy-text-wrap'>
                       {merchantInfo?.data.accountNumber}
                       <IoIosCopy onClick={() => copyToClipboard(merchantInfo?.data.accountNumber || '')} />
                     </span>
                   </div>
                   <div className="detail-item">
-                    <h4>Bank:</h4>
+                    <span>Bank:</span>
                     <span className='copy-text-wrap'>
                       {merchantInfo?.data.bankName}
                       <IoIosCopy onClick={() => copyToClipboard(merchantInfo?.data.bankName || '')} />
                     </span>
                   </div>
                   <div className="detail-item">
-                    <h4>Account Name:</h4>
+                    <span>Account Name:</span>
                     <span className='copy-text-wrap'>
                       {merchantInfo?.data.accountName}
                       <IoIosCopy onClick={() => copyToClipboard(merchantInfo?.data.accountName || '')} />

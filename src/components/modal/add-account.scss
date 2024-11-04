@@ -1,16 +1,47 @@
+@import "../../mixins.scss";
+
+
+
+
+
   .account-form-container {
       flex: 1;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50%;
       margin: 0 auto;
-      padding: 20px;
       border-radius: 5px;
+
+      h1{
+        font-size: 22px;
+      }
+      .wrap{
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        padding: 10px;
+          border-radius: 7px;
+          background-color: rgb(29, 35, 43);
+          .caution-icon{
+            font-size: 16px;
+            @include respond(phone) {
+              margin-bottom: 17px;
+            }
+            
+          }
+  
+        .warning-text {
+          color: rgb(210, 132, 132);
+          font-size: 14px;
+          margin-top: 10px;
+          
+          @include respond(phone) {
+            font-size: 14px;
+          }
+        }
+      }
 
       .success-message {
         text-align: center;
-        padding: 20px;
+        padding: 22px;
         color: #155724;
         border-radius: 5px;
       }
@@ -27,15 +58,15 @@
 
             .account-label {
                 margin-bottom: 5px;
-                font-weight: bold;
-                font-size: 18px;
+                // font-weight: bold;
+                font-size: 14px;
               }
 
             .account-input {
                 width: 100%;
                 padding: 10px;
                 border: 1px solid #ddd;
-                border-radius: 4px;
+                border-radius: 7px;
                 box-sizing: border-box;
               }
         }

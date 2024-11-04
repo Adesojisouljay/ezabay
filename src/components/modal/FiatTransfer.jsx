@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { fiatTransfer } from '../../api/ekzat';
 import { getUserProfile, getReceiverProfile } from '../../api/profile';
 import { Loader } from '../loader/Loader';
-import './deposit-modal.scss';
+// import './deposit-modal.scss';
+import "./fiatransfer.scss"
 
 
 export const DepositModal = ({ isOpen, onClose }) => {
@@ -82,10 +83,11 @@ export const DepositModal = ({ isOpen, onClose }) => {
   }
 
   return (
-    <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
-      <div className={`modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
-      <div className="modal">
+    <div className={`f-t-modal-overlay ${isOpen ? 'open' : ''}`}>
+      <div className={`f-t-modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
+      <div className="f-t-modal">
         <span className="close-modal" onClick={onClose}>X</span>
+        <div className="fiattransfer-container">
         <h2>Transfer Fiat</h2> 
         {loading && <Loader />}
         <div className="ftr-input-group">
@@ -115,6 +117,7 @@ export const DepositModal = ({ isOpen, onClose }) => {
           className="deposit-btn" 
           onClick={handleFiatTransfer}
         >Proceed</button>
+        </div>
       </div>
     </div>
   );
