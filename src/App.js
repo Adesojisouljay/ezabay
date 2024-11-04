@@ -37,6 +37,8 @@ import RightNav from "./components/nav-bar/RightNav";
 import { CryptoNews } from "./pages/CryptoNews";
 import { SingleNewsPage } from "./pages/SingleNewsPage";
 import { Profile } from "./pages/ProfilePage";
+import { HiveOnboard } from "./components/hive-onboard/HiveOnboard";
+import { SpendHbd } from "./components/spend-hbd/SpendHbd";
 
 function App() {
   const user = useSelector((state) => state.ekzaUser);
@@ -77,6 +79,8 @@ function App() {
           <Route path="/register" element={<Register/>}/>
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/hive-onboard" element={<HiveOnboard/>}/>
+            <Route path="/spend-hbd" element={<SpendHbd/>}/>
             {/* <Route path="/mining" element={<Miner/>}/> */}
             {/* COMMENT ALL OUT FOR TESTING SAKE */}
             {/* <Route path="/controller" element={<Admin/>}/> */}
