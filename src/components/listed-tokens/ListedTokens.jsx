@@ -55,7 +55,7 @@ export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) =
 
     return (
         <div className="listed-tokens-container">
-            <h2 className="listed-tokens-title">Tokens on Ekzatrade</h2>
+            <h2 className="listed-tokens-title">Market updates</h2>
             <div className="listed-token-grid">
                 {loading && <p className="listed-tokens-loading">Loading...</p>}
                 {error && <p className="listed-tokens-error">{error}</p>}

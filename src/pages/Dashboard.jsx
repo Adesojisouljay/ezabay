@@ -12,16 +12,13 @@ import { FiatWithdrawalModal } from "../components/modal/FiatWithdrawal";
 import { setCurrency } from "../redux/currencySlice";
 import { usdPrice } from "../utils";
 import { ListedTokens } from "../components/listed-tokens/ListedTokens";
-import { HiCircleStack } from "react-icons/hi2"
+import { HiCircleStack, HiArrowUpCircle, HiArrowDownCircle, HiMiniShoppingCart, HiFolderPlus, HiFolderMinus } from "react-icons/hi2"
 import { TransactionHistory } from "../components/transaction-history/TransactionHistory";
 import { FiSearch } from "react-icons/fi";
 import DBTransctionHistory from "../components/transaction-history/DBTransctionHistory";
 import { BuySell } from "../components/modal/BuySell";
 import { currenciesList } from "../vairables/protectedRoutes";
 import { GeneralDropdown } from "../components/dropdown/GeneralDrpdpown";
-
-
-
 
 export const Dashboard = () => {
   const user = useSelector((state) => state.ekzaUser.user);
@@ -46,10 +43,6 @@ export const Dashboard = () => {
   const [assetOpen, setAssetOpen] = useState(false)
   const [toggle, setToggle] = useState(true)
 
-
-
-
-  console.log(toggle)
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
 };
@@ -182,33 +175,33 @@ export const Dashboard = () => {
             <div className="bal-btn-wrap">
               <span className="bal-btn" onClick={() => openDepositModal(assets[0])}>
                 <div className="bal-icon-wrap">
-                <HiCircleStack />
+                <HiArrowDownCircle size={30} />
                 </div>
                 <span>Receive </span>
               </span>
               <span className="bal-btn" onClick={openWithdrawalModal}>
                 <div className="bal-icon-wrap">
-                <HiCircleStack />
+                <HiArrowUpCircle size={30} />
                 </div>
                 <span>Send</span>
               </span>
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
                 <div className="bal-icon-wrap">
-                <HiCircleStack />
+                <HiMiniShoppingCart size={30}/>
                 </div>
                 <span>Buy/Sell</span>
               </span>
               <span className="bal-btn" onClick={openFiatDepositModal}>
                 <div className="bal-icon-wrap">
-                <HiCircleStack />
+                <HiFolderPlus size={30} />
                 </div>
                 <span>Deposit</span>
               </span>
 
               <span className="bal-btn" onClick={openFiatWithdrawalModal}>
                 <div className="bal-icon-wrap">
-                <HiCircleStack />
+                <HiFolderMinus size={30} />
                 </div>
                 <span>Withdraw</span>
               </span>
@@ -218,7 +211,6 @@ export const Dashboard = () => {
 
           </div>
 
- 
            <div className={`portfolio-reward-wraper ${!toggle ? "display-block" : ""} `}>
             <div className="card-wrap border-transparent">
             
