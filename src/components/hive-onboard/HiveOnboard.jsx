@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createHiveAccount } from '../../api/hive'
 import { Loader } from '../loader/Loader'
 import { MdOutlineDownload } from 'react-icons/md'
+import { getAccount } from '../../hive-client'
 import "./index.scss"
 
 export const HiveOnboard = () => {
@@ -10,9 +11,36 @@ export const HiveOnboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [step, setStep] = useState(1);
-    const [newHiveAccount, setNewHiveAccount] = useState(null)
+    const [newHiveAccount, setNewHiveAccount] = useState(null);
+    const [message, setMessage] = useState(null);
+    const [usernameAvailable, setUsernameAvailable] = useState(null);
+
+    useEffect(() => {
+        if(username) {
+            getExistingHiveAccount()
+        }
+    }, [username])
 
     const fee = 6
+
+    const getExistingHiveAccount = async () => {
+        setLoading(true)
+        try {
+            const account = await getAccount(username);
+            if(account) {
+                setMessage("Username is already taken");
+                setUsernameAvailable(true)
+            } else {
+                setMessage("Username Available ✅")
+                setUsernameAvailable(false)
+            }
+            console.log(account)
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,9 +70,12 @@ export const HiveOnboard = () => {
       <div className='hive-onboard-wrapper'>
        {step === 1 &&  <>
             <h1>Create Hive Account</h1>
+            <span className={usernameAvailable ? "warning" : "success"}>
+                {message}
+            </span>
                 <form onSubmit={handleSubmit}>
                     {loading && <Loader />}
-                    <span>Fee: 6 Hive(NGN2000)</span>
+                    <span>Fee: 4.5 Hive(NGN2000)</span>
                 <div className="onboard-form-group">
                     <input
                     type={"text"}
@@ -64,12 +95,12 @@ export const HiveOnboard = () => {
                     />
                 </div>
                 <button
-                    style={{ cursor: loading && "not-allowed" }}
+                    style={{ cursor: (loading || usernameAvailable) && "not-allowed" }}
                     className="onboard-btn"
-                    disabled={loading}
+                    disabled={loading || usernameAvailable}
                     type="submit"
                 >
-                    Login
+                    Create Account
                 </button>
                 </form>
         </>}
