@@ -33,3 +33,20 @@ export const getCommunityPosts = async (
     }
   };
   
+  export const getSinglePost = async (author, permlink) => {
+    try {
+        const response = await bridgeApiCall("get_content", {
+            author,
+            permlink
+        });
+
+        if (response) {
+            return resolvePosts([response]);
+        }
+
+        return null;
+    } catch (error) {
+        console.error("Failed to fetch single post:", error);
+        throw error;
+    }
+};

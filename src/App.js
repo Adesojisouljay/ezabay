@@ -39,6 +39,7 @@ import { SingleNewsPage } from "./pages/SingleNewsPage";
 import { Profile } from "./pages/ProfilePage";
 import { HiveOnboard } from "./components/hive-onboard/HiveOnboard";
 import { SpendHbd } from "./components/spend-hbd/SpendHbd";
+import { SingleCommunityPost } from "./components/single-post/singleCommunityPost";
 
 function App() {
   const user = useSelector((state) => state.ekzaUser);
@@ -81,6 +82,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/hive-onboard" element={<HiveOnboard/>}/>
             <Route path="/spend-hbd" element={<SpendHbd/>}/>
+            <Route path="/post/:author/:permlink" element={<SingleCommunityPost/>}/>
             {/* <Route path="/mining" element={<Miner/>}/> */}
             {/* COMMENT ALL OUT FOR TESTING SAKE */}
             {/* <Route path="/controller" element={<Admin/>}/> */}
