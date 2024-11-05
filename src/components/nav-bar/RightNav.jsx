@@ -44,11 +44,11 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
             <div className="welcom-wrap"><span>Welcome</span><h4>{user?.username}</h4></div>
 
             <span>Email: {user?.email}</span>
-            {user?.kyc?.kycStatus === "Verified" ? <div className="verified-wrap"><span> {user?.kyc?.kycStatus} </span> <MdVerified size={20} color='green' /></div> :
-            <div className="pending-wrap"><span> {user?.kyc?.kycStatus} </span> <MdPending size={20} color='orange' /></div>}
+            {/* {user?.kyc?.kycStatus === "Verified" ? <div className="verified-wrap"><span> {user?.kyc?.kycStatus} </span> <MdVerified size={20} color='green' /></div> :
+            <div className="pending-wrap"><span> {user?.kyc?.kycStatus} </span> <MdPending size={20} color='orange' /></div>} */}
           </div>
         </div>
-        <hr className='divide-line'/>
+        {/* <hr className='divide-line'/> */}
 
         <ul>
           {menuLinks.map((data) => (
@@ -66,9 +66,44 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
             </Link>
           ))}
         </ul>
-        <div className="logout-wrap" onClick={handleLogout}>
-          <h3>Logout</h3>
-        <Link to="/"><FiLogOut   className='bold-icon'/></Link>
+        <div style={{display: "flex", flexDirection: "column", marginTop: "20px", gap: "10px"}}>
+          <div className="logout-wrap">
+            <h3>
+              <a 
+              style={{cursor: "pointer"}}
+              href="https://hive.blog/hive-106130/@thedistriator/distriator-the-new-auto-cashback-reward-app-for-spending-in-bitcoin-lighting-and-hive-dollars" 
+              target="_blank" 
+              rel="noopener noreferrer">
+                Learn about distriator
+              </a>
+            </h3>
+          </div>
+          <div className="logout-wrap">
+            <h3>
+              <a 
+              style={{cursor: "pointer"}}
+              href="https://distriator.com/" 
+              target="_blank" 
+              rel="noopener noreferrer">
+                Go to distriator.com
+              </a>
+            </h3>
+          </div>
+          <div className="logout-wrap">
+            <h3>
+              <a 
+              style={{cursor: "pointer"}}
+              href="https://spendhbd.com/" 
+              target="_blank" 
+              rel="noopener noreferrer">
+                Go to spendhbd.com
+              </a>
+            </h3>
+          </div>
+          <div className="logout-wrap" onClick={handleLogout}>
+            <h3>Logout</h3>
+          <Link to="/"><FiLogOut   className='bold-icon'/></Link>
+          </div>
         </div>
 
 
