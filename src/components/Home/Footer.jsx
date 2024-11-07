@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
               <div className="footer-box">
                 <h3>Subscribe to Our Newsletter</h3>
-                <p>Stay updated with the latest news and offers from EkzaTrade by subscribing to our newsletter. Enter your email below to subscribe.</p>
+                <p>Stay updated with the latest news and offers from Ezabay by subscribing to our newsletter. Enter your email below to subscribe.</p>
                 {/* <div className="newsletter-wrap">
                   <input type="text" placeholder="Email" />
                   <div className="send-icon">
@@ -58,7 +58,7 @@ export default function Footer() {
             </div>
             <div className="footer-bm">
               <hr />
-              <h3>Copyright © 2023 EkzaTrade. All rights reserved.</h3>
+              <h3>Copyright © 2023 Ezabay. All rights reserved.</h3>
             </div>
             <div className="circle-wrap">
               <img className="circlebig" src={circlebig} alt="" />

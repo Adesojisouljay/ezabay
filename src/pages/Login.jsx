@@ -81,9 +81,9 @@ const closePassword = () => {
       </div>
       <div className="login-right">
       <div className="sign-in-wrap">
-        <h1 className="header-text">Sign in to Ekza</h1>
+        <h1 className="header-text">Sign in to Ezabay</h1>
         <div className="caution-wrap">
-          <img src={Secure} alt="" /> <span>Always verify that you are on <span className="securelink">ekza.com</span></span>
+          <img src={Secure} alt="" /> <span>Always verify that you are on <span className="securelink">ezabay.com</span></span>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="login-form-group">
@@ -129,7 +129,6 @@ const closePassword = () => {
             Login
           </button>
         </form>
-        
         
         <div className="or-wrap">
         <div class="or-divider">

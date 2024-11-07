@@ -7,34 +7,34 @@ export default function Faq() {
     const [CurOpen, setCurOpen] = useState(null);
     const data = [
         {
-          title: "What is EkzaTrade?",
+          title: "What is Ezabay?",
           text:
-            "EkzaTrade is a user-friendly cryptocurrency exchange that allows users to buy, sell, and manage Hive, HBD, and other digital assets. It simplifies the process for those who want to access the Hive ecosystem, including SpendHBD and Distraitor, where Hive and HBD can be spent or used for rewards."
+            "Ezabay is a user-friendly cryptocurrency exchange that allows users to buy, sell, and manage Hive, HBD, and other digital assets. It simplifies the process for those who want to access the Hive ecosystem, including SpendHBD and Distraitor, where Hive and HBD can be spent or used for rewards."
         },
         {
           title: "How do I create an account?",
           text:
-            "Creating an account on EkzaTrade is easy. Click on the 'Register' button, provide your details, and verify your email address. Once you're done, you'll be ready to buy Hive, HBD, and other cryptocurrencies right away."
+            "Creating an account on Ezabay is easy. Click on the 'Register' button, provide your details, and verify your email address. Once you're done, you'll be ready to buy Hive, HBD, and other cryptocurrencies right away."
         },
         {
           title: "How can I buy Hive and HBD?",
           text:
-            "Buying Hive and HBD on EkzaTrade is straightforward. After creating an account, simply go to the trading section, choose Hive or HBD, and make your purchase using supported payment methods."
+            "Buying Hive and HBD on Ezabay is straightforward. After creating an account, simply go to the trading section, choose Hive or HBD, and make your purchase using supported payment methods."
         },
         {
-            title: "Are there any fees for trading on EkzaTrade?",
+            title: "Are there any fees for trading on Ezabay?",
             text:
-            "EkzaTrade offers competitive trading fees, especially for Hive and HBD. Our platform has low fees to make sure your trading experience is affordable, with discounts available for high-volume traders."
+            "Ezabay offers competitive trading fees, especially for Hive and HBD. Our platform has low fees to make sure your trading experience is affordable, with discounts available for high-volume traders."
           },
           {
             title: "Can I use Hive and HBD outside of trading?",
             text:
-            "Yes, Hive and HBD can be used on platforms like SpendHBD to make purchases and on Distraitor to participate in community rewards and projects. EkzaTrade makes it easy to access these platforms by providing a seamless way to buy and manage Hive and HBD."
+            "Yes, Hive and HBD can be used on platforms like SpendHBD to make purchases and on Distraitor to participate in community rewards and projects. Ezabay makes it easy to access these platforms by providing a seamless way to buy and manage Hive and HBD."
           },
           {
-            title: "Is EkzaTrade a secure platform?",
+            title: "Is Ezabay a secure platform?",
             text:
-              "Security is our top priority. EkzaTrade uses advanced measures such as two-factor authentication (2FA), encrypted transactions, and secure storage of assets to protect your funds at all times."
+              "Security is our top priority. Ezabay uses advanced measures such as two-factor authentication (2FA), encrypted transactions, and secure storage of assets to protect your funds at all times."
           }
       ];
    
