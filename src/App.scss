@@ -266,3 +266,13 @@ a{
 .animate-spin {
   animation: spin 1s linear infinite
 }
+
+.dot {
+  animation: blinker 0.90s linear infinite;
+  color: #ffbb00;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

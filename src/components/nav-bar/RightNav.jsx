@@ -29,9 +29,9 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
   ];
 
   return (
-    <div className={`rightnav-layer ${rightNav ? "opennn" : "closed"}`} >
-      <div className="right-nav-container"></div>
-      <div className="rightnav-wrap" >
+    <div className={`rightnav-layer ${rightNav ? "opennn" : "closed"}`} onClick={handleRightNav} >
+      <div className="right-nav-container" onClick={(e) => e.stopPropagation()}></div>
+      <div className="rightnav-wrap" onClick={(e) => e.stopPropagation()}>
         <div className="close-add-btn" onClick={handleRightNav}>
           <IoClose size={20} />
         </div>

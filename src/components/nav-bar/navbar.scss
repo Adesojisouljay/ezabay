@@ -46,13 +46,13 @@ ol {
   }
 
   .logo{
-    display: flex;
-    align-items: center;
-    gap: 7px;
+    // display: flex;
+    // align-items: center;
+    // gap: 7px;
     img {
-      width: 40px;
+      width: 70px;
       @include respond(phone) {
-        width: 30px;
+        width: 60px;
       }
     }
     .project-name{

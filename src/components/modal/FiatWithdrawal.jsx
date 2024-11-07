@@ -166,6 +166,7 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
       <div className={`modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
       <div className="modal ">
         <span className="close-modal" onClick={onClose}>X</span>
+        <div className="fiat-withdrawal-container">
         <h2>Fiat Withdrawal</h2>
         {user?.accounts?.length === 0 ? 
         <>
@@ -183,7 +184,7 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
               <div className="withdrawal-amount">
                 <label htmlFor="amount">Withdrawal Amount:</label>
                 <input
-                className='withrawal-amount-input'
+                // className='withrawal-amount-input'
                   id="amount"
                   type="number"
                   value={withdrawalAmount}
@@ -196,14 +197,13 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
               <div className="fw-bank-accounts">
                 <div className='fw-account-select-wrap'>
                     <p>Select Account</p>
-                  <div 
-                    className='fw-icon-wrap'
-                    onClick={openAddAccount}
-                  >
-                    <span style={{position: "absolute", right: 150, width: "max-content", marginRight: 5}}>
-                      Add another account
+                    <div className="wrap">
+                    <span >
+                      Add  account
                     </span>
+                  <div className='fw-icon-wrap'onClick={openAddAccount} >
                     <BsPlusCircleFill />
+                  </div>
                   </div>
                 </div>
 
@@ -269,6 +269,8 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
           )}
         </>
         }
+      </div>
+      
       </div>
       {addingAccount && <AddAccount isOpen={addingAccount} onClose={closeAddAccount}/>}
     </div>

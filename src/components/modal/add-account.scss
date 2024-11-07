@@ -9,6 +9,9 @@
       display: flex;
       margin: 0 auto;
       border-radius: 5px;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
 
       h1{
         font-size: 22px;
@@ -65,9 +68,10 @@
             .account-input {
                 width: 100%;
                 padding: 10px;
-                border: 1px solid #ddd;
+                border: 1px solid grey;
                 border-radius: 7px;
                 box-sizing: border-box;
+                background-color: inherit;
               }
         }
       }

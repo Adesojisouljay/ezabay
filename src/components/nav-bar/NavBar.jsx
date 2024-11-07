@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { persistor } from '../../redux/store';
-import logo from "../../assets/logo-cut.png";
+// import logo from "../../assets/logo-cut.png";
 import './navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/userReducer';
@@ -10,6 +10,7 @@ import { formatDate, formatString } from '../../utils';
 import { PiGreaterThanBold } from 'react-icons/pi';
 import { userAvatar } from '../../vairables/protectedRoutes';
 import RightNav from './RightNav';
+import logo from "../../assets/Ezabay-logo.png"
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -50,10 +51,10 @@ export const NavBar = () => {
       <div className="nav-content">
         <div className="logo">
           <img src={logo} alt="" />
-          <div className="project-name">
+          {/* <div className="project-name">
             <p>Ekza</p>
             <p>Trade</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="login-toggle-wrap">
