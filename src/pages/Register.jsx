@@ -4,7 +4,7 @@ import { registerUser } from '../api/auth';
 import cat from "../assets/document_shape.webp";
 import eth from "../assets/eth-icon.webp";
 import './register.scss';
-import Logo from "../assets/download (1).png";
+import Logo from "../assets/Ezabay-st-logo.png";
 import { Loader } from '../components/loader/Loader';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 

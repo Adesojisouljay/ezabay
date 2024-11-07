@@ -7,10 +7,15 @@
     align-items: center;
     gap: 6px;
     justify-content: space-around;
-    // padding: 10px;
+    padding: 10px;
     cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 7px;
     margin-bottom: 7px;
+    background: linear-gradient(127deg, hsla(0, 0%, 100%, 0.16) 17.35%, hsla(0, 0%, 85%, 0.04) 76.2%);
+    background: linear-gradient(127deg, hsla(0, 0%, 100%, 0.16) 17.35%, hsla(0, 0%, 85%, 0.04) 76.2%);
+    @include respond(phone) {
+      padding: 5px;
+    }
   }
 
   .gd-select-image{
@@ -24,7 +29,7 @@
   }
 
   .gd-select-title{
-    font-size: 20px;
+    font-size: 18px;
     @include respond(phone) {
       font-size: 16.5px;
     }

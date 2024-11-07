@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { loginUser } from "../api/auth";
 import { loginStart, loginSuccess, loginFailure } from "../redux/userReducer";
 import { isTokenValid } from "../utils";
-import Logo from "../assets/download (1).png";
+import Logo from "../assets/Ezabay-st-logo.png";
 import Secure from "../assets/icons8-secure-64.png"
 import Google from "../assets/google-1.jfif"
 import { Loader } from "../components/loader/Loader";

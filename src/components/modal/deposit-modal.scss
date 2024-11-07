@@ -202,6 +202,9 @@
     padding: 7px;
     border-radius: 7px;
     background-color: rgba(21, 31, 43, .4);
+    & .note-bg{
+      background-color: rgb(2 8 15 )
+    }
     header{
       font-size: 16px;
       margin-bottom: 2px;
