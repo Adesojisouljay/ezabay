@@ -126,7 +126,7 @@ export const DepositHiveModal = ({ isOpen, onClose, assets, user }) => {
           <span>Deposit Memo:</span> 
           <div className="wrap">
             <span>{selectedAsset?.memo}</span>
-            <FaCopy className='copy-icon' onClick={handleCopyAddress} size={20}/>
+            <FaCopy className='copy-icon' onClick={handleCopyMemo} size={20}/>
           </div>
         </div>}
 
