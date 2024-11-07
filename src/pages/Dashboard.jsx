@@ -313,7 +313,7 @@ export const Dashboard = () => {
     </div>
         <div className="dashboard-footer">
           <FaRegCopyright />
-          <p>Ekzatrade, All Rights Reserved</p>
+          <p>Ezabay, All Rights Reserved</p>
         </div>
         
       </div>
