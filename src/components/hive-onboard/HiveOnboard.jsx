@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import { createHiveAccount } from "../../api/hive";
 import { Loader } from "../loader/Loader";
+import { useSelector } from "react-redux";
 import { MdOutlineDownload } from "react-icons/md";
 import { getAccount } from "../../hive-client";
 import { createHiveAccount, getAccountKeys } from '../../api/hive';
@@ -8,6 +8,9 @@ import success from "../../assets/succes.gif";
 import "./index.scss";
 
 export const HiveOnboard = () => {
+
+    const user = useSelector((state) => state.ekzaUser.user);
+    const hiveAsset = user?.assets[0]
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +18,7 @@ export const HiveOnboard = () => {
   const [newHiveAccount, setNewHiveAccount] = useState(null);
   const [message, setMessage] = useState(null);
   const [usernameAvailable, setUsernameAvailable] = useState(null);
-  const [isDownloaded, setIsDownloaded] = useState(true);
+  const [isDownloaded, setIsDownloaded] = useState(false);
   const [feeType, setFeeType] = useState('hive')
 
   useEffect(() => {
@@ -37,7 +40,6 @@ export const HiveOnboard = () => {
         setMessage("Username Available ✅");
         setUsernameAvailable(false);
       }
-      console.log(account);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -45,11 +47,8 @@ export const HiveOnboard = () => {
     }
   };
 
-
- 
-
- const getAccountkeys = async () => {
-        // e.preventDefault();
+ const getkeys = async (e) => {
+        e.preventDefault();
         setLoading(true)
         try {
             const response = await getAccountKeys(username)
@@ -65,21 +64,40 @@ export const HiveOnboard = () => {
         }
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        getAccountkeys()
-     
-      };
-
       const handleDownload = () => {
         const accountData = `
+
+         Please handle your password & private keys with extra caution. Your account will no longer be accessible if you loose your password. We do not keep copy of it, it is confidential only you have access to it.
+        We recommend that;
+        1. PRINT this file out and store it securely.
+        2. NEVER use your password/owner key on untrusted apps.
+        3. Save all your keys within a password manager, as you will need them frequently.
+        4. Don't keep this file within the reach of a third party.
+    
+            Your Hive Account Information
+
           Username: ${newHiveAccount?.username}
+
           Master Password: ${newHiveAccount?.masterPassword}
+
           Active Private Key: ${newHiveAccount?.active}
+
           Active Posting Key: ${newHiveAccount?.posting}
+
           Active Owner Key: ${newHiveAccount?.owner}
+
           Active Memo Key: ${newHiveAccount?.memo}
+
+
+                        WHAT YOUR KEYS ARE USED FOR
+
+            Owner key: "Change Password, Change Keys, Recover Account",
+
+            Active key: "Transfer Funds, Power up/down, Voting Witnesses/Proposals",
+
+            Posting key: "Post, Comment, Vote, Reblog, Follow, Profile updates",
+
+            Memo key: "Send/View encrypted messages on transfers",
         `;
       
         const blob = new Blob([accountData], { type: "text/plain" });
@@ -91,43 +109,35 @@ export const HiveOnboard = () => {
         a.click();
         URL.revokeObjectURL(url);
         document.body.removeChild(a); 
-        setIsDownloaded(false);
+        setIsDownloaded(true);
       };
       
-
-
       const createAccount = async (e) => {
         e.preventDefault();
         console.log("hello")
         setLoading(true)
-        // try {
+        try {
 
-        //     const hiveAccountData = {
-        //         username,
-        //         email,
-        //         fee,
-        //         feeType,
-        //         // publicKeys: newHiveAccount.publicKeys
-        //         accountKeys: newHiveAccount
-        //     }
+            const hiveAccountData = {
+                username,
+                email,
+                fee,
+                feeType,
+                accountKeys: newHiveAccount
+            }
 
-        //     const response = await createHiveAccount(hiveAccountData)
-        //     console.log(response)
-        //     if(response.success) {
-        //         setNewHiveAccount(response.accountDetails)
-        //         setLoading(false)
-        //         setStep(3)
-        //     }
-        // } catch (error) {
-        //     console.log(error)
-        //     setLoading(false)
-        // }
+            const response = await createHiveAccount(hiveAccountData)
+            console.log(response)
+            if(response.success) {
+                setNewHiveAccount(response.accountDetails)
+                setLoading(false)
+                setStep(3)
+            }
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
     }
-
-
-
-
-
 
   return (
     <div className="hive-onboard-container">
@@ -138,9 +148,9 @@ export const HiveOnboard = () => {
             <span className={usernameAvailable ? "warning" : "success"}>
               {message}
             </span>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={getkeys}>
               {loading && <Loader />}
-              <span>Fee: 4.5 Hive(NGN2000)</span>
+              <span>Fee: 4.5 Hive(₦{(hiveAsset.nairaValue * 4.5).toFixed(3)})</span>
               <div className="onboard-form-group">
                 <input
                   type={"text"}
@@ -222,12 +232,14 @@ export const HiveOnboard = () => {
             </button>
 
             <button onClick={createAccount}
-              className={`onboard-btn ${isDownloaded ? "downloaded" : ""}`}
-              disabled={isDownloaded}
+            style={{cursor: isDownloaded ? "" : "not-allowed"}}
+              className={`onboard-btn ${!isDownloaded ? "downloaded" : ""}`}
+              disabled={!isDownloaded}
             >
               <div className="wrap">
                 {loading ? (<>
-              <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              <div class="lds-spinner">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 <span>Creating.....</span>
                 </>) : (<span>Create Account</span>)
               
