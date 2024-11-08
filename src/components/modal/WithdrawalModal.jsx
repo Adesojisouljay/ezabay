@@ -14,16 +14,17 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
   const [step, setStep] = useState(1);
   const [fee, setFee] = useState(0.000)
 
+  
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
   const [openList, setOpenList] = useState(false)
   const  [displaySearch , setDisplaySearch] = useState(false)
-
+  
   useEffect(() => {
     handleGetFees(selectedAsset?.currency)
   }, [selectedAsset])
-
+  
   const handleGeneralWithdrawal = async (e) => {
-    if(selectedAsset.currency === "hive" || selectedAsset.currency === "hive_dollar") {
+    if(selectedAsset.currency === "hive" || (selectedAsset.currency === "hive_dollar" || selectedAsset.currency === "hbd")) {
       await handleHiveWithdrawal();
     } else {
       await handleCryptoWithdrawal();
@@ -34,9 +35,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
 
     try {
       const withdrawalData = { to, amount, currency: selectedAsset.currency, memo, withdrawalToken };
-      console.log(withdrawalData)
       const result = await processHiveWithdrawal(withdrawalData);
-      console.log(result);
       setMessage(result.message);
       setStep(3)
     } catch (error) {
@@ -48,9 +47,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
   const handleCryptoWithdrawal = async () => {
     try {
       const withdrawalData = { to, amount, currency: selectedAsset.currency };
-      console.log(withdrawalData)
       const result = await processCryptoWithdrawal(withdrawalData);
-      console.log(result);
       setMessage(result.message);
       setStep(3)
     } catch (error) {
@@ -81,15 +78,12 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
 
   const handleGetFees = async () => {
     try {
-      console.log(selectedAsset.depositAddress, to)
         const result = await getTransactionFees(selectedAsset.currency, selectedAsset.depositAddress, selectedAsset.depositAddress);
-        console.log('Transaction Fees:', result);
         setFee(result.fee)
     } catch (error) {
         console.error('Error fetching transaction fees:', error);
     }
 };
-
 
   return (
     <div className={`fadded-container modal-overlay ${isOpen ? 'open' : ''}`} >

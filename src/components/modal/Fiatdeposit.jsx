@@ -38,11 +38,18 @@ function Fiatdeposit({ isOpen, onClose }) {
         return;
       }
       const merchantData = await getRandomMerchant();
-      setMerchantInfo(merchantData);
-      setStep(2);
-      setLoading(false);
+        setMerchantInfo(merchantData);
+        setStep(2);
+        setLoading(false);
     } catch (error) {
-      console.log(error);
+      toast.warning(error?.message, {
+        style: {
+          backgroundColor: 'rgba(229, 229, 229, 0.1)',
+          color: '#fff',
+          fontSize: '16px',
+          marginTop: "60px"
+        },
+      });
       setLoading(false);
     }
   };
