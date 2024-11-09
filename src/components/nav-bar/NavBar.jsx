@@ -53,7 +53,7 @@ export const NavBar = () => {
           <img src={logo} alt="" />
         </div>
 
-        {user.role !== "user" && <div className='merchant-btn-wrapper'>
+        {user?.role !== "user" && <div className='merchant-btn-wrapper'>
           <button className="merchant-btn">Deposit</button>
           <button className="merchant-btn">Withdrawal</button>
           <button className="merchant-btn">Kyc Actions</button>
