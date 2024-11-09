@@ -74,6 +74,24 @@ ol {
     }
   }
 
+  .merchant-btn-wrapper{
+    display: flex;
+    gap: 15px;
+    background-color: #091e32;
+    border-radius: 20px;
+    padding: 10px;
+
+  .merchant-btn{
+    background-color: #093637;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: 1px solid #091e32;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  }
+
   .user-top-info{
     display: flex;
     align-items: center;

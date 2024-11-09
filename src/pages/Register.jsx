@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/auth';
 import cat from "../assets/document_shape.webp";
@@ -7,6 +7,7 @@ import './register.scss';
 import Logo from "../assets/Ezabay-st-logo.png";
 import { Loader } from '../components/loader/Loader';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { GeneralDropdown } from '../components/dropdown/GeneralDrpdpown';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -19,8 +20,26 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [countries, setCountries] = useState([]); // State to store countries
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [openCountryList, setOpenCountryList] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const data = await response.json();
+        const countryNames = data.map(country => country.name.common).sort();
+        setCountries(countryNames);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+  
+    fetchCountries();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,9 +52,8 @@ const Register = () => {
     }
 
     try {
-      const userData = { email, password, username, firstName, lastName };
+      const userData = { email, password, username, firstName, lastName, country: selectedCountry };
       const resp = await registerUser(userData);
-      console.log(resp);
 
       if (resp.success) {
         navigate("/login");
@@ -49,6 +67,17 @@ const Register = () => {
       setError('An unexpected error occurred');
       setLoading(false)
     }
+  };
+
+  const handleCountryChange = (country) => {
+    const selectedC = countries.find(c => c === country);
+    console.log(selectedC)
+    setSelectedCountry(selectedC)
+    
+  };
+
+  const handleOpenList = () => {
+    setOpenCountryList(!openCountryList);
   };
 
   return (
@@ -98,6 +127,17 @@ const Register = () => {
               required
             />
           </div>
+          <div className="reg-form-group">
+            <label>Country</label>
+            <GeneralDropdown
+                  items={countries}
+                  setSelectedItem={handleCountryChange} 
+                  handleOpenList={handleOpenList} 
+                  openList={openCountryList}
+                  itemName={selectedCountry}
+                />
+          </div>
+          
           <div className="reg-form-group passwd">
             <label>Password</label>
             <input
