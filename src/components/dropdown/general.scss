@@ -1,8 +1,11 @@
 @import "../../mixins.scss";
 .gd-container{
-    position: relative
-}
-.gd-item-select-wrap{
+    position: relative;
+    z-index: 9000;
+  }
+
+  .gd-item-select-wrap{
+    // width: 200px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -43,7 +46,7 @@
     width: 100%;
     margin-top: 5px;
     border-radius: 7px;
-    height: 400px;
+    max-height: 400px;
     overflow: scroll;
   }
   
@@ -77,6 +80,11 @@
   .gd-openlist{
     display: block;
   }
+  
+  .gd-short-list {
+    height: max-content;
+  }
+  
   .gd-openclose{
     display: none;
   }

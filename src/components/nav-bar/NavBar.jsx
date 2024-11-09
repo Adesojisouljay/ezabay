@@ -51,11 +51,13 @@ export const NavBar = () => {
       <div className="nav-content">
         <div className="logo">
           <img src={logo} alt="" />
-          {/* <div className="project-name">
-            <p>Ekza</p>
-            <p>Trade</p>
-          </div> */}
         </div>
+
+        {user.role !== "user" && <div className='merchant-btn-wrapper'>
+          <button className="merchant-btn">Deposit</button>
+          <button className="merchant-btn">Withdrawal</button>
+          <button className="merchant-btn">Kyc Actions</button>
+        </div>}
 
         <div className="login-toggle-wrap">
           {isAuthenticated ? (
