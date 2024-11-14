@@ -171,6 +171,15 @@
     font-size: 18px;
   }
 }
+.spend-link-wraper{
+  display: "flex";
+   flex-direction: column;
+  //  margin-top: 20px;
+   gap: "4px";
+   .spend-link{
+    font-size: 14px;
+   }
+}
 .logout-wrap {
   display: flex;
   align-items: center;
@@ -181,6 +190,7 @@
   cursor: pointer;
   @include respond(phone) {
     gap: 10px;
+    margin-top: 0px;
   }
   h3 {
     font-size: 18px;

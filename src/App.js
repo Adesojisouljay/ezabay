@@ -104,7 +104,7 @@ function App() {
             {/* <Route path="/page" element={<Pagetest />} /> */}
             {/* <Route path="/crypto-news" element={<CryptoNews />} /> */}
             {/* <Route path="/crypto-news/:id" element={<SingleNewsPage />} /> */}
-            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,16 +1,16 @@
 import React from 'react'
 import "./rightnav.scss"
 import { IoClose, IoLogoSlack } from 'react-icons/io5'
-import { FaCogs, FaEnvelope, FaHome, FaIdCard, FaSpinner, FaTachometerAlt, FaUser, FaWallet } from 'react-icons/fa'
+import {  FaTachometerAlt,  } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
 import { formatString } from '../../utils';
 import { Link } from 'react-router-dom';
-import { MdOutlineVerified, MdPending, MdVerified } from 'react-icons/md';
 import { userAvatar } from '../../vairables/protectedRoutes';
 import { FiLogOut } from 'react-icons/fi';
 import { IoIosApps } from 'react-icons/io';
 import { PiHandDeposit, PiHandWithdraw } from 'react-icons/pi';
 import { RiDashboardLine } from 'react-icons/ri';
+import { CgProfile } from 'react-icons/cg';
 
 function RightNav({ rightNav, handleRightNav, handleLogout }) {
   // const isAuthenticated = useSelector(state => state?.ekzaUser?.isAuthenticated);
@@ -20,6 +20,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
     { logo: <RiDashboardLine size={20} />, text: "Dashboard", path: "/dashboard" },
     { logo: <IoLogoSlack size={20} />, text: "Create Hive Account", path: "/hive-onboard" },
     { logo: <FaTachometerAlt size={20} />, text: "Spend HBD", path: "/spend-hbd" },
+    { logo: <CgProfile size={20} />, text: "Profile", path: "/profile" },
     ...(user && user?.role !== "user"
       ? [
           { logo: <PiHandDeposit size={20} />, text: "Deposit", path: "/fiat-deposit-action" },
@@ -67,10 +68,10 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
             </Link>
           ))}
         </ul>
-        <div style={{display: "flex", flexDirection: "column", marginTop: "20px", gap: "10px"}}>
+        <div className='spend-link-wraper' style={{}}>
           <div className="logout-wrap">
             <h3>
-              <a 
+              <a className='spend-link'
               style={{cursor: "pointer"}}
               href="https://hive.blog/hive-106130/@thedistriator/distriator-the-new-auto-cashback-reward-app-for-spending-in-bitcoin-lighting-and-hive-dollars" 
               target="_blank" 
@@ -81,7 +82,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
           </div>
           <div className="logout-wrap">
             <h3>
-              <a 
+              <a className='spend-link'
               style={{cursor: "pointer"}}
               href="https://distriator.com/" 
               target="_blank" 
@@ -92,7 +93,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
           </div>
           <div className="logout-wrap">
             <h3>
-              <a 
+              <a className='spend-link'
               style={{cursor: "pointer"}}
               href="https://spendhbd.com/" 
               target="_blank" 

@@ -1,3 +1,4 @@
+@import "../mixins.scss";
 .profile-container {
     padding: 20px;
     width: 60%;
@@ -5,31 +6,50 @@
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
+    @include respond(phone) {
+      width: 95%;
+      padding: 5px;
+    }
   }
   
   .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 7px;
     margin-bottom: 20px;
     
     .profile-avatar {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 20px;
+      @include respond(phone) {
+        width: 70px;
+        height: 70px;
+      }
     }
   
     h2 {
       font-size: 24px;
       margin: 0;
+      @include respond(phone) {
+        font-size: 18px;
+      }
+    }
+    p{
+      @include respond(phone) {
+        font-size: 14px;
+      }
     }
 
     .kyc-status {
         font-weight: bold;
         font-size: 20px;
+        @include respond(phone) {
+          font-size: 14px;
+        }
     
         &.kyc-approved {
             color: green;
@@ -52,35 +72,63 @@
     }
   }
   
-  .profile-details {
-    display: flex;
-    flex-direction: column;
-
+  
     .detail-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px;
       margin-bottom: 20px;
-      border-bottom: 1px solid gray;
+      border: 1px solid gray;
+      border-radius: 7px;
+      width: 100%;
+      @include respond(phone) {
+        padding: 5px 10px;
+      }
+
+      
   
       span {
         font-weight: bold;
+        @include respond(phone) {
+          font-size: 13px;
+        }
+      }
+
+      .profile-details {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+      }
+
+      .profileImage{
+        font-size: 30px;
+        @include respond(phone) {
+          font-size: 13px;
+        }
       }
 
       .image-select-input{
         display: flex;
-        flex-direction: column;
-        align-items: ce;
+        // flex-direction: column;
+        align-items: center;
         width: 50%;
         gap: 10px;
+        @include respond(phone) {
+          flex-direction: column;
+        }
+        // width: 500%;
         input {
           padding: 8px;
           border-radius: 5px;
-          border: 1px solid #ccc;
-          width: 100%;
+          border: 1px solid grey;
+          width: 50%;
           background: transparent;
           color: #fff;
+          @include respond(phone) {
+            width: 100%;
+            padding: 5px 8px;
+          }
           // display: none;
         }
 
@@ -89,21 +137,26 @@
           align-items: center;
           justify-content: center;
           gap: 10px;
-          font-size: 18px;
+          font-size: 14px;
           width: 50%;
           align-self: flex-end;
           padding: 10px;
           background-color: #007bff;
           color: #fff;
           cursor: pointer;
+          border-radius: 8px;
+          @include respond(phone) {
+            width: 100%;
+            padding: 5px 10px;
+          }
         }
       }
 
       input {
         padding: 8px;
         border-radius: 5px;
-        border: 1px solid #ccc;
-        width: 60%;
+        border: 1px solid grey;
+        width: max-content;
         background: transparent;
         color: #fff;
       }
@@ -112,6 +165,9 @@
   
     h3 {
       font-size: 18px;
+      @include respond(phone) {
+        font-size: 14px;
+      }
     }
   
     ul {
@@ -122,6 +178,12 @@
         margin: 5px 0;
         padding: 10px;
         border-radius: 5px;
+        @include respond(phone) {
+          font-size: 14px;
+          margin:  0px;
+          padding: 5px 0px;
+
+        }
       }
     }
   
@@ -151,7 +213,7 @@
         }
       }
     }
-  }
+  
 
   .edit-pencil-wrap{
     position: relative;
@@ -163,10 +225,69 @@
     border-radius: 50%;
     background: #007bff;
     cursor: pointer;
+    @include respond(phone) {
+      width: 25px;
+      height: 25px;
+    }
+
+    
   }
+  .add-acct-pencil-wrap{
+
+    position: relative;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    @include respond(phone) {
+      display: block;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+
+  // Class to display on phone screens only
+  .edit-pencil-phone {
+    display: none;
+  
+    @include respond(phone) {
+      display: flex;
+    }
+  }
+  
+  // Class to hide on phone screens only
+  .edit-pencil-desktop {
+    display: flex;
+  
+    @include respond(phone) {
+      display: none;
+    }
+  }
+
+
 
   .profile-account-wrap{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .wrap{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @include respond(phone) {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .delete-icon{
+    @include respond(phone) {
+      font-size: 18px;
+    }
+    
   }
