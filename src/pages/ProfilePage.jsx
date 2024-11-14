@@ -10,11 +10,15 @@ import { deleteBankAccount, updateProfile } from '../api/ekzat';
 import { getUserProfile } from '../api/profile';
 import { Loader } from '../components/loader/Loader';
 import './profile.scss';
-import { userAvatar } from '../vairables/protectedRoutes';
+import { currenciesList, userAvatar } from '../vairables/protectedRoutes';
+import { FaCopy } from 'react-icons/fa';
+import { GeneralDropdown } from '../components/dropdown/GeneralDrpdpown';
+import { setCurrency } from '../redux/currencySlice';
 
 export const Profile = () => {
   
     const global = useSelector(state => state.ekzaUser)
+    const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
     const user = global?.user;
     const dispatch = useDispatch()
 
@@ -28,6 +32,12 @@ export const Profile = () => {
   const [openDeleteAcc, setOpenDeleteAcc] = useState(false);
   const [loading, setLoading] = useState(false);
   const [accountId, setAccountId] = useState("")
+  const [openList,  setOpenList] = useState(false)
+
+
+  const appBaseUrl = window.location.origin
+const userReferralLink = `${appBaseUrl}/register?referral=${user.userMemo}`
+console.log(userReferralLink)
 
   const handleEdit = () => {
     setEditMode(true);
@@ -45,6 +55,9 @@ export const Profile = () => {
         default:
             return '';
     }
+};
+const handleOpenList = () => {
+  setOpenList(!openList);
 };
 
 const openPassword = () => {
@@ -81,6 +94,25 @@ const showTooltip = (type) => {
   }
 }
 
+const handleCopyMemo = () => {
+  navigator.clipboard.writeText(userReferralLink);
+  toast.success("Referral link copied to clipboard!", {
+    style: {
+      backgroundColor: 'rgba(229, 229, 229, 0.1)',
+      color: '#fff',
+      fontSize: '16px',
+      marginTop: "60px"
+    },
+  });
+};
+
+const handleCurrencyChange = (currency) => {
+  console.log(currency)
+  const selectedC = currenciesList.find(c => c.name === currency);
+  console.log(selectedC)
+  dispatch(setCurrency(currency));
+};
+
 const deleteAcc = async ()=> {
   setLoading(true)
   try {
@@ -111,6 +143,7 @@ const deleteAcc = async ()=> {
     setLoading(false)
   }
 }
+
 
 const idUpload = (e) => {
     const file = e.target.files[0];
@@ -164,13 +197,24 @@ const idUpload = (e) => {
         <h2>{`${user?.firstName} ${user?.lastName} ${user?.otherName || ''}`}</h2>
         <p>Username: {user?.username}</p>
         <p>Account created on: {new Date(user.createdAt).toLocaleDateString()}</p>
-        <p className={`kyc-status`}>
+        {/* <p className={`kyc-status`}>
             KYC Status: <span className={`kyc-status ${getKycStatusClass(user?.kyc?.kycStatus)}`}>{user?.kyc?.kycStatus}</span>
-        </p>
-        <h2 className="edit-title" onClick={handleEdit}>
+        </p> */}
+        {/* <h2 className="edit-title" onClick={handleEdit}>
           Customize Your Profile
-        </h2>
+        </h2> */}
       </div>
+
+      <div className="bal-text-select-wrap">
+                <GeneralDropdown
+                  items={currenciesList}
+                  setSelectedItem={handleCurrencyChange} 
+                  handleOpenList={handleOpenList} 
+                  openList={openList}
+                  itemName={selectedCurrency}
+                />
+
+               </div>
 
       <div className="profile-details">
         <div className="detail-item">
@@ -195,6 +239,7 @@ const idUpload = (e) => {
               >
                 {loading ? "Uploading Image..." : <>Upload Image <BsCloudUploadFill/></>}
               </button>
+              
             </div>
           </div>
         
@@ -222,7 +267,26 @@ const idUpload = (e) => {
 
             <div className='detail-item profile-account-wrap'>
               <div>
+                <div className="wrap">
                 <h3>Bank Accounts</h3>
+                <div 
+                className='add-acct-pencil-wrap edit-pencil-phone' 
+                onClick={openAccount}
+                onMouseEnter={() => { 
+                  showTooltip("account")
+                }}
+                onMouseLeave={() => setShowTitle(false)}
+                onTouchStart={() => { 
+                  showTooltip("account")
+                }}
+                onTouchEnd={() => setShowTitle(false)}
+              >
+                {(showTitle && tooltipText === "Add new account") && <span style={{position: "absolute", right: 40, width: "max-content", marginRight: 5}}>
+                    {tooltipText}
+                </span>}
+                <BsPlusCircleFill />
+              </div>
+                </div>
                 <ul>
                   {user?.accounts?.map((account, index) => (
                     <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", widows: "100%"}} key={index}>
@@ -240,7 +304,7 @@ const idUpload = (e) => {
                 </ul>
               </div>
               <div 
-                className='edit-pencil-wrap'
+                className='edit-pencil-wrap edit-pencil-desktop'
                 onClick={openAccount}
                 onMouseEnter={() => { 
                   showTooltip("account")
@@ -258,7 +322,7 @@ const idUpload = (e) => {
               </div>
             </div>
 
-            <div className="detail-item">
+            {/* <div className="detail-item">
               <label htmlFor="currency">Currency:</label>
               <div className="image-select-input">
                 <select>
@@ -266,9 +330,25 @@ const idUpload = (e) => {
                   <option value="USD">USD</option>
                 </select>
               </div>
-            </div>
+            </div> */}
+
+            {/* <div className="bal-text-select-wrap">
+                <GeneralDropdown
+                  items={currenciesList}
+                  setSelectedItem={handleCurrencyChange} 
+                  handleOpenList={handleOpenList} 
+                  openList={openList}
+                  itemName={selectedCurrency}
+                />
+
+               </div> */}
 
             <div className="detail-item">
+              <span>Referral code: {appBaseUrl}/register?referral=${user.userMemo}</span>
+              <FaCopy className='copy-icon' onClick={handleCopyMemo} size={20}/>
+            </div>
+
+            {/* <div className="detail-item">
               <label htmlFor="currency">Theme:</label>
               <div className="image-select-input">
                 <select>
@@ -276,9 +356,9 @@ const idUpload = (e) => {
                   <option value="Night">Night</option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
-            <div className="detail-item">
+            {/* <div className="detail-item">
               <label htmlFor="currency">Language:</label>
               <div className="image-select-input">
                 <select>
@@ -288,7 +368,7 @@ const idUpload = (e) => {
                   <option value="Yoruba">Yoruba</option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
           </div>
         {openAccountModal && 
