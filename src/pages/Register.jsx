@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { registerUser } from '../api/auth';
 import cat from "../assets/document_shape.webp";
 import eth from "../assets/eth-icon.webp";
@@ -10,6 +10,12 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { GeneralDropdown } from '../components/dropdown/GeneralDrpdpown';
 
 const Register = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location?.search);
+  const referralCodeFromURL = queryParams?.get('referral');
+  console.log(referralCodeFromURL);
+
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
@@ -23,8 +29,13 @@ const Register = () => {
   const [countries, setCountries] = useState([]); // State to store countries
   const [selectedCountry, setSelectedCountry] = useState("");
   const [openCountryList, setOpenCountryList] = useState(false);
+  const [referralCode, setReferralCode] = useState(referralCodeFromURL || '');
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (referralCodeFromURL) {
+      setReferralCode(referralCodeFromURL);
+    }
+  }, [referralCodeFromURL]);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -52,7 +63,7 @@ const Register = () => {
     }
 
     try {
-      const userData = { email, password, username, firstName, lastName, country: selectedCountry };
+      const userData = { email, password, username, firstName, lastName, country: selectedCountry, referralCode: referralCode };
       const resp = await registerUser(userData);
 
       if (resp.success) {
@@ -125,6 +136,15 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your username"
               required
+            />
+          </div>
+          <div className="reg-form-group">
+            <label>Referral Code (Optional)</label>
+            <input
+              type="text"
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
+              placeholder="Enter referral code"
             />
           </div>
           <div className="reg-form-group">

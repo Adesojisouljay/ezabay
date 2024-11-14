@@ -18,7 +18,7 @@ export const Home = () => {
   //   }, [])
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(isTokenValid(token))
+          
     if (isTokenValid(token)) {
         navigate("/dashboard")
     }
