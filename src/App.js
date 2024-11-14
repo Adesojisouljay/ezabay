@@ -85,16 +85,16 @@ function App() {
             <Route path="/post/:author/:permlink" element={<SingleCommunityPost/>}/>
             {/* <Route path="/mining" element={<Miner/>}/> */}
             {/* COMMENT ALL OUT FOR TESTING SAKE */}
-            {/* <Route path="/controller" element={<Admin/>}/> */}
+            <Route path="/controller" element={<Admin/>}/>
             {/* <Route path="/test" element={<Pagetest />} /> */}
             {/* <Route path="spinner" element={<Spinner />} /> */}
             {/* <Route path="/kyc" element={<Kyc />} /> */}
-            {/* <Route path="/manage-kyc" element={<KYCManagement />} /> */}
-            {/* <Route path="/merchant-action" element={<MerchantAction />} /> */}
+            <Route path="/manage-kyc" element={<KYCManagement />} />
+            <Route path="/merchant-action" element={<MerchantAction />} />
             {/* <Route path="/create-merchant" element={<CreateMerchantForm />} /> */}
             {/* <Route path="/accounts" element={<BankAccount />} /> */}
-            {/* <Route path="/fiat-withdrawal-action" element={<FiatWithdrawalAction />} /> */}
-            {/* <Route path="/fiat-deposit-action" element={<FiatDepositAction />} /> */}
+            <Route path="/fiat-withdrawal-action" element={<FiatWithdrawalAction />} />
+            <Route path="/fiat-deposit-action" element={<FiatDepositAction />} />
             {/* <Route path="/wallet" element={<WalletPage />} /> */}
             {/* <Route path="/coin/:id" element={<SingleCoinInfo />} /> */}
             {/* <Route path="/transactions" element={<TransactionHistory />} /> */}
@@ -105,7 +105,7 @@ function App() {
             {/* <Route path="/crypto-news" element={<CryptoNews />} /> */}
             {/* <Route path="/crypto-news/:id" element={<SingleNewsPage />} /> */}
             {/* <Route path="/profile" element={<Profile />} /> */}
-          </Route>f
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

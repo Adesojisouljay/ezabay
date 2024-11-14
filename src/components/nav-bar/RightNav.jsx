@@ -1,6 +1,6 @@
 import React from 'react'
 import "./rightnav.scss"
-import { IoClose } from 'react-icons/io5'
+import { IoClose, IoLogoSlack } from 'react-icons/io5'
 import { FaCogs, FaEnvelope, FaHome, FaIdCard, FaSpinner, FaTachometerAlt, FaUser, FaWallet } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
 import { formatString } from '../../utils';
@@ -8,24 +8,25 @@ import { Link } from 'react-router-dom';
 import { MdOutlineVerified, MdPending, MdVerified } from 'react-icons/md';
 import { userAvatar } from '../../vairables/protectedRoutes';
 import { FiLogOut } from 'react-icons/fi';
+import { IoIosApps } from 'react-icons/io';
+import { PiHandDeposit, PiHandWithdraw } from 'react-icons/pi';
+import { RiDashboardLine } from 'react-icons/ri';
 
 function RightNav({ rightNav, handleRightNav, handleLogout }) {
   // const isAuthenticated = useSelector(state => state?.ekzaUser?.isAuthenticated);
   const user = useSelector(state => state?.ekzaUser?.user);
 
   const menuLinks = [
-    // { logo: <FaHome size={25} />, text: "Home", path: "/" },
-    { logo: <FaTachometerAlt size={20} />, text: "Dashboard", path: "/dashboard" },
-    { logo: <FaTachometerAlt size={20} />, text: "Create Hive Account", path: "/hive-onboard" },
+    { logo: <RiDashboardLine size={20} />, text: "Dashboard", path: "/dashboard" },
+    { logo: <IoLogoSlack size={20} />, text: "Create Hive Account", path: "/hive-onboard" },
     { logo: <FaTachometerAlt size={20} />, text: "Spend HBD", path: "/spend-hbd" },
-    // { logo: <FaTachometerAlt size={20} />, text: "Wallet", path: "/wallet" }, 
-    // { logo: <FaTachometerAlt size={20} />, text: "Transactions", path: "/transactions" },
-    // { logo: <FaSpinner size={20} />, text: "Spinner", path: "/spinner" },
-    // { logo: <FaEnvelope size={20} />, text: "Contact", path: "/contact" },
-    // { logo: <FaUser size={20} />, text: "Profile", path: "/profile" },
-    // { logo: <FaCogs size={20} />, text: "Settings", path: "/settings" },
-    // { logo: <FaWallet size={20} />, text: "Accounts", path: "/accounts" },
-    // { logo: <FaIdCard size={20} />, text: "KYC", path: "/kyc" }
+    ...(user && user?.role !== "user"
+      ? [
+          { logo: <PiHandDeposit size={20} />, text: "Deposit", path: "/fiat-deposit-action" },
+          { logo: <PiHandWithdraw size={20} />, text: "Withdrawal", path: "/fiat-withdrawal-action" },
+          { logo: <IoIosApps size={20} />, text: "Kyc Actions", path: "/merchant-action" },
+        ]
+      : [])
   ];
 
   return (

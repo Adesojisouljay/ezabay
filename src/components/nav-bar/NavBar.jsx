@@ -45,18 +45,17 @@ export const NavBar = () => {
   };
 
   return (
-    ///////WE WILL REFACTORE ENTIRE NAVBAR WHEN KESOLINK IS BACK
     <>
     <nav className="navbar">
       <div className="nav-content">
-        <div className="logo">
+        <Link to={"/"}><div className="logo">
           <img src={logo} alt="" />
-        </div>
+        </div></Link>
 
         {(isAuthenticated && user?.role !== "user") && <div className='merchant-btn-wrapper'>
-          <button className="merchant-btn">Deposit</button>
-          <button className="merchant-btn">Withdrawal</button>
-          <button className="merchant-btn">Kyc Actions</button>
+          <Link to={"/fiat-deposit-action"}><button className="merchant-btn">Deposit</button></Link>
+          <Link to={"fiat-withdrawal-action"}><button className="merchant-btn">Withdrawal</button></Link>
+          <Link to={"/merchant-action"}><button className="merchant-btn">Kyc Actions</button></Link>
         </div>}
 
         <div className="login-toggle-wrap">
