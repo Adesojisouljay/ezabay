@@ -53,7 +53,7 @@
   .content-box {
     grid-column: 2 / -1;
     line-height: 1.6;
-    color: grey;
+    color: #fff;
     font-size: 20px;
     font-weight: 700;
     @include respond(phone) {
@@ -67,7 +67,7 @@
   }
   
   .content-box ul {
-    color: #868e96;
+    color: #fff;
     margin-left: 16px;
     margin-top: 16px;
   

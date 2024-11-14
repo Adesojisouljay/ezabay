@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
           <div className="foooter-bm">
           <hr />
-          <h3>Copyright © 2023 Ezabay.  All rights reserved.  </h3>
+          <h3>Ezabay © 2023. All Rights Reserved.  </h3>
           </div>
           <div className="circle-wrap">
                 <img className="circlebig" src={circlebig} alt="" />

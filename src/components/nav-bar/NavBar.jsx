@@ -52,11 +52,11 @@ export const NavBar = () => {
           <img src={logo} alt="" />
         </div></Link>
 
-        {(isAuthenticated && user?.role !== "user") && <div className='merchant-btn-wrapper'>
+        {/* {(isAuthenticated && user?.role !== "user") && <div className='merchant-btn-wrapper'>
           <Link to={"/fiat-deposit-action"}><button className="merchant-btn">Deposit</button></Link>
           <Link to={"fiat-withdrawal-action"}><button className="merchant-btn">Withdrawal</button></Link>
-          <Link to={"/merchant-action"}><button className="merchant-btn">Kyc Actions</button></Link>
-        </div>}
+          <Link to={"/kyc-action"}><button className="merchant-btn">Kyc Actions</button></Link>
+        </div>} */}
 
         <div className="login-toggle-wrap">
           {isAuthenticated ? (

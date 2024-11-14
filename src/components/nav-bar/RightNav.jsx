@@ -24,7 +24,7 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
       ? [
           { logo: <PiHandDeposit size={20} />, text: "Deposit", path: "/fiat-deposit-action" },
           { logo: <PiHandWithdraw size={20} />, text: "Withdrawal", path: "/fiat-withdrawal-action" },
-          { logo: <IoIosApps size={20} />, text: "Kyc Actions", path: "/merchant-action" },
+          { logo: <IoIosApps size={20} />, text: "Kyc Actions", path: "/manage-kyc" },
         ]
       : [])
   ];
@@ -53,15 +53,15 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
 
         <ul>
           {menuLinks.map((data) => (
-            <Link to={data.path} onClick={handleRightNav}>
+            <Link to={data?.path} onClick={handleRightNav}>
               <li style={{backgroundColor: "red"}}>
                 <span className='icon-wrap' >
                   <span>
-                    {data.logo}
+                    {data?.logo}
                   </span>
                 </span>
                 <span className='tab-title'>
-                  {data.text}
+                  {data?.text}
                 </span>
               </li>
             </Link>
