@@ -1,5 +1,5 @@
 import React from 'react'
-import "./feature.css"
+import "./feature.scss"
 import btc from "../../assets/btc-icon.webp"
 import lock from "../../assets/lock-iocn.webp"
 import pig from "../../assets/pig-icon.webp"

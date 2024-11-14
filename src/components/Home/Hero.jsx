@@ -1,5 +1,5 @@
 import React from 'react'
-import "./hero.css"
+import "./hero.scss"
 import { Link } from 'react-router-dom';
 // import btc from "../../assets/btc-icon.webp"
 import btc from "../../assets/btc-icon.webp"

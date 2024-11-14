@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { RiArrowDownSLine } from "react-icons/ri";
-import "./faq.css"
+import "./faq.scss"
 
 export default function Faq() {
     const [CurOpen, setCurOpen] = useState(null);

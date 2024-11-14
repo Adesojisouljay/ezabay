@@ -77,17 +77,22 @@ ol {
   .merchant-btn-wrapper{
     display: flex;
     gap: 15px;
-    background-color: #091e32;
+    // background-color: #091e32;
     border-radius: 20px;
     padding: 10px;
+    @include respond(phone) {
+      display: none;
+    }
 
   .merchant-btn{
-    background-color: #093637;
-    padding: 10px;
+    // background-color: #093637;
+    background: linear-gradient(127deg, #41454a 17.35%, #242a31 76.2%);
+    padding: 8px 10px;
     font-size: 16px;
     color: #fff;
+    // color: rgb(124, 124, 124);
     border: 1px solid #091e32;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
   }
   }

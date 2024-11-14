@@ -188,20 +188,20 @@ export const Dashboard = () => {
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
                 <div className="bal-icon-wrap">
-                <HiMiniShoppingCart size={30}/>
+                <HiMiniShoppingCart size={27}/>
                 </div>
                 <span>Buy/Sell</span>
               </span>
               <span className="bal-btn" onClick={openFiatDepositModal}>
                 <div className="bal-icon-wrap">
-                <HiFolderPlus size={30} />
+                <HiFolderPlus size={27} />
                 </div>
                 <span>Deposit</span>
               </span>
 
               <span className="bal-btn" onClick={openFiatWithdrawalModal}>
                 <div className="bal-icon-wrap">
-                <HiFolderMinus size={30} />
+                <HiFolderMinus size={27} />
                 </div>
                 <span>Withdraw</span>
               </span>
