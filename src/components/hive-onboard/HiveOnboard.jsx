@@ -27,7 +27,7 @@ export const HiveOnboard = () => {
     }
   }, [username]);
 
-  const fee = 6;
+  const fee = 4.5;
 
   const getExistingHiveAccount = async () => {
     setLoading(true);
@@ -114,14 +114,13 @@ export const HiveOnboard = () => {
       
       const createAccount = async (e) => {
         e.preventDefault();
-        console.log("hello")
         setLoading(true)
         try {
 
             const hiveAccountData = {
                 username,
                 email,
-                fee,
+                fee: feeType === "hive" ? fee + "Hive" : (hiveAsset.nairaValue * 4.5).toFixed(3),
                 feeType,
                 accountKeys: newHiveAccount
             }
@@ -185,9 +184,9 @@ export const HiveOnboard = () => {
                         <input
                             className='fee-type-input'
                             type="radio"
-                            value="naira"
-                            checked={feeType === 'naira'}
-                            onChange={() => setFeeType('naira')}
+                            value="NGN"
+                            checked={feeType === 'NGN'}
+                            onChange={() => setFeeType('NGN')}
                         />
                         Pay with Naira
                     </label>
