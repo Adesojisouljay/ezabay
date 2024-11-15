@@ -344,7 +344,7 @@ const idUpload = (e) => {
                </div> */}
 
             <div className="detail-item">
-              <span>Referral link: {appBaseUrl}/register?referral=${user.userMemo}</span>
+              <span>Referral link: {appBaseUrl}/register?referral={user.userMemo}</span>
               <FaCopy className='copy-icon' onClick={handleCopyMemo} size={20}/>
             </div>
 
