@@ -46,21 +46,18 @@ const Login = () => {
       dispatch(loginStart());
 
       const response = await loginUser(userData);
-      console.log(response);
       if (response && response?.data?.success) {
         dispatch(loginSuccess(response.data));
 
         window.location.href = "/dashboard";
         setLoading(false);
       } else {
-        setError(response?.data?.error);
+        setError(response?.response.data?.message);
         dispatch(loginFailure("Invalid email or password"));
         setLoading(false);
       }
     } catch (error) {
-      console.error("Error logging in:", error);
-
-      setError(error || error.error);
+      console.log(error)
       setLoading(false);
       dispatch(loginFailure("An error occurred. Please try again later."));
     }
