@@ -15,6 +15,7 @@ import eth from "../assets/eth-icon.webp";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { PasswordReset } from "../components/modal/PasswordReset";
 import "./login.scss";
+import Spinner from "../components/spinner/Spinner";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -113,7 +114,7 @@ const closePassword = () => {
               onClick={() => setShowPassword(!showPassword)}
             />}
           </div>
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-messages">{error}</p>}
           <div className="Forget-Password-wrap">
           <span onClick={openPassword}>Forgot Password</span>
         </div>
@@ -123,7 +124,8 @@ const closePassword = () => {
             disabled={loading}
             type="submit"
           >
-            Login
+            {loading ? (<Spinner/>) : (<span>Login</span>)}
+            
           </button>
         </form>
         

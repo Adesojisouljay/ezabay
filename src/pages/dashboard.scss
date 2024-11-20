@@ -269,6 +269,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+  z-index: 1;
   @include respond(phone) {
     gap: 4px;
   }
@@ -495,7 +497,7 @@
   .wrap-asset-header{
    @include respond(phone) {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 10px;
    }
@@ -539,6 +541,7 @@
   margin-bottom: 10px;
   @include respond(phone) {
     margin-bottom: 0px;
+    display: none;
   }
 }
 
@@ -702,9 +705,15 @@
   padding-top: 10px;
 }
 
+.wrap-float-right{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .left-tabs-wrap {
   display: flex;
   justify-content: space-between;
+  // justify-content: flex-end;
   align-items: center;
   width: 40%;
   margin: 12px 12px;
