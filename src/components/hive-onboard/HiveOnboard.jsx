@@ -120,7 +120,7 @@ export const HiveOnboard = () => {
             const hiveAccountData = {
                 username,
                 email,
-                fee: feeType === "hive" ? fee + "Hive" : (hiveAsset.nairaValue * 4.5).toFixed(3),
+                fee: feeType === "hive" ? fee : (hiveAsset.nairaValue * 4.5).toFixed(3),
                 feeType,
                 accountKeys: newHiveAccount
             }
