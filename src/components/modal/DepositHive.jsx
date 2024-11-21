@@ -96,7 +96,7 @@ export const DepositHiveModal = ({ isOpen, onClose, assets, user }) => {
 
         <QRCode
     size={256}
-    style={{ height: "auto", maxWidth: "30%", width: "30%" }}
+    style={{ height: "auto", maxWidth: "20%", width: "20%" }}
     value={selectedAsset?.depositAddress}
     viewBox={`0 0 256 256`}
   />

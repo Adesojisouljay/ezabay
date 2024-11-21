@@ -8,6 +8,7 @@ import Logo from "../assets/Ezabay-st-logo.png";
 import { Loader } from '../components/loader/Loader';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { GeneralDropdown } from '../components/dropdown/GeneralDrpdpown';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -67,6 +68,7 @@ const Register = () => {
       const resp = await registerUser(userData);
 
       if (resp.success) {
+        toast.success(resp.message)
         navigate("/login");
         setLoading(false)
       } else {
@@ -94,7 +96,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="reg-left">
-      <h1 className="header-text">Register on Ezabay</h1>
+      <h1 className="header-text">Create Account</h1>
         {loading && <Loader/>}
       <form onSubmit={handleSubmit}>
           <div className="reg-form-group">

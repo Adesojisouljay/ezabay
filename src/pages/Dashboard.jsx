@@ -134,20 +134,22 @@ export const Dashboard = () => {
       </div>
         <div className={`dashboard-content-wrap `}>
           <div className={`dashboard-main border-transparent   ${toggle ? "display-block" : ""}`}>
+            <div className="wrap-float-right">
           <div className="left-tabs-wrap margin-out">
                 <div
-                    className={`dashboard ${!toggle ? 'activetab-1' : ''}`}
+                    className={`dashboard ${toggle ? 'activetab-1' : ''}`}
                     onClick={()=> setToggle(true)}
                 >
                     Dashboard
                 </div>
                 <div
-                    className={`asset ${toggle  ? 'activetab-1' : ''}`}
+                    className={`asset ${!toggle  ? 'activetab-1' : ''}`}
                     onClick={()=> setToggle(false)}
                 >
-                    Asset
+                    Wallet
                 </div>
 
+            </div>
             </div>
             <div className="bal-top-wrap">
               <div className="total-fait-wrap">
@@ -177,13 +179,13 @@ export const Dashboard = () => {
                 <div className="bal-icon-wrap">
                 <HiArrowDownCircle size={30} />
                 </div>
-                <span>Receive </span>
+                <span>Deposit</span>
               </span>
               <span className="bal-btn" onClick={openWithdrawalModal}>
                 <div className="bal-icon-wrap">
                 <HiArrowUpCircle size={30} />
                 </div>
-                <span>Send</span>
+                <span>Recieve</span>
               </span>
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
@@ -219,21 +221,21 @@ export const Dashboard = () => {
                 <div className="card-icon">
                   <FaGift size={20} />
                 </div>
-                <h4>Assets</h4>
+                <h4>Wallet</h4>
               </div>
                <div className="tab-wrap">
               <div className="left-tabs-wrap tab-width">
               <div
-                    className={`dashboard ${!toggle ? 'activetab-1' : ''}`}
+                    className={`dashboard ${toggle ? 'activetab-1' : ''}`}
                     onClick={()=> setToggle(true)}
                 >
                     Dashboard
                 </div>
                 <div
-                    className={`asset ${toggle  ? 'activetab-1' : ''}`}
+                    className={`asset ${!toggle  ? 'activetab-1' : ''}`}
                     onClick={()=> setToggle(false)}
                 >
-                    Asset
+                    Wallet
                 </div>
 
               </div>
@@ -293,7 +295,7 @@ export const Dashboard = () => {
 
             <div className="right-tabs-wrap">
                 <input className={`search-bal-input ${activeTab === 'transaction' ? 'activetab' : ''}`} type="text" placeholder="Search..." />
-                <input className={`search-coin-price ${activeTab === 'coin-price' ? 'activetab' : ''}`} type="text" placeholder=" name or ID..."  value={searchQueryCoinPrice}
+                <input className={`search-coin-price ${activeTab === 'coin-price' ? 'activetab' : ''}`} type="text" placeholder="Search coin "  value={searchQueryCoinPrice}
                     onChange={(e) => setSearchQueryCoinPrice(e.target.value)}/>
                 <FiSearch size={19} />
             </div>
