@@ -81,7 +81,7 @@ const closePassword = () => {
       <div className="sign-in-wrap">
         <h1 className="header-text">Sign in to Ezabay</h1>
         <div className="caution-wrap">
-          <img src={Secure} alt="" /> <span>Always verify that you are on <span className="securelink">ezabay.com</span></span>
+          <img src={Secure} alt="" /> <span>Always verify that you are on <span className="securelink">hives.ezabay.com</span></span>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="login-form-group">

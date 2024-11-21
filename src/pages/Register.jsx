@@ -68,7 +68,7 @@ const Register = () => {
       const resp = await registerUser(userData);
 
       if (resp.success) {
-        toast.success("Registraion completed")
+        toast.success(resp.message)
         navigate("/login");
         setLoading(false)
       } else {
@@ -96,7 +96,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="reg-left">
-      <h1 className="header-text">Register on Ezabay</h1>
+      <h1 className="header-text">Create Account</h1>
         {loading && <Loader/>}
       <form onSubmit={handleSubmit}>
           <div className="reg-form-group">

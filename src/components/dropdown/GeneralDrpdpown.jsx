@@ -28,7 +28,7 @@ export const GeneralDropdown = (props) => {
        <input 
             className={`dropdown-search-input ${"openlist"} `}
             type="text"
-            placeholder='Search coin'
+            placeholder='Search...'
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
