@@ -163,10 +163,14 @@ export const Dashboard = () => {
                 />
 
                </div>
-                <div className="bal-show-wrap">{showBalance ? <h3>********</h3> : <span>
+               <div className="bal-show-wrap">
+                {showBalance ? ( <h3>********</h3> ) : (
+                  <span>
                   <span className="dashboard-currency-symbol">{isUsd ? "$" : "₦"}</span>
-                  {isUsd ? (user?.nairaBalance / usdPrice)?.toFixed(3) : user?.nairaBalance.toFixed(3)}
-                </span>}</div>
+                  {isUsd ? new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance / usdPrice)
+                    : new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance)}
+                 </span>)}
+                </div>
               </div>
               <div className="bal-action-wrap">
                <FaRegEye className="show-balance" onClick={toggleBalanceView} />
@@ -175,18 +179,19 @@ export const Dashboard = () => {
             <div className="bal-btn-wrap-main"> 
 
             <div className="bal-btn-wrap">
+            <span className="bal-btn" onClick={openWithdrawalModal}>
+                <div className="bal-icon-wrap">
+                <HiArrowUpCircle size={30} />
+                </div>
+                <span>Send</span>
+              </span>
               <span className="bal-btn" onClick={() => openDepositModal(assets[0])}>
                 <div className="bal-icon-wrap">
                 <HiArrowDownCircle size={30} />
                 </div>
-                <span>Deposit</span>
+                <span>Receive</span>
               </span>
-              <span className="bal-btn" onClick={openWithdrawalModal}>
-                <div className="bal-icon-wrap">
-                <HiArrowUpCircle size={30} />
-                </div>
-                <span>Recieve</span>
-              </span>
+              
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
                 <div className="bal-icon-wrap">

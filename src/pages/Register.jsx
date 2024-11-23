@@ -104,7 +104,7 @@ const Register = () => {
             <input
               type="text"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value.toLowerCase())}
               placeholder="Enter your first name"
               required
             />
@@ -114,7 +114,7 @@ const Register = () => {
             <input
               type="text"
               value={lastName}
-              onChange={(e) => setLastname(e.target.value)}
+              onChange={(e) => setLastname(e.target.value.toLowerCase())}
               placeholder="Enter your last name"
               required
             />
@@ -124,7 +124,7 @@ const Register = () => {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
               placeholder="Enter your email"
               required
             />
@@ -135,7 +135,7 @@ const Register = () => {
               className="yep"
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.toLowerCase())}
               placeholder="Enter your username"
               required
             />
