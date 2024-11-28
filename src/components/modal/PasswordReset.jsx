@@ -111,9 +111,7 @@ export const PasswordReset = ({ isOpen, onClose, propsEmail }) => {
         newPassword,
         token
       }
-      console.log("resetting.......", newPasswordData)
         const response = await resetPassword(newPasswordData)
-        console.log(response)
 
         if (response.success) {
             toast.success('Password reset successfull', {

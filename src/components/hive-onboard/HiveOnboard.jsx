@@ -58,10 +58,8 @@ export const HiveOnboard = () => {
     debounceTimer.current = setTimeout(() => {
       const isValid = validateHiveUsername(newUsername, setMessage);
       if (isValid) {
-        console.log("Username is valid!");
         setUsernameValid(true)
       } else {
-        console.log("Username validation failed.");
         setUsernameValid(false)
       }
     }, 500);
@@ -70,7 +68,6 @@ export const HiveOnboard = () => {
   const usernameChanged = (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername.toLowerCase());
-    console.log(username)
   };
 
  const getkeys = async (e) => {
@@ -78,7 +75,6 @@ export const HiveOnboard = () => {
         setLoading(true)
         try {
             const response = await getAccountKeys(username)
-            console.log(response)
             if(response.success){
                 setNewHiveAccount(response.accountDetails);
                 setLoading(false)
@@ -152,7 +148,6 @@ export const HiveOnboard = () => {
             }
 
             const response = await createHiveAccount(hiveAccountData)
-            console.log(response)
             if(response.success) {
                 setNewHiveAccount(response.accountDetails)
                 setLoading(false)

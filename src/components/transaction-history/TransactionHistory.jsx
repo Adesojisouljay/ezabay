@@ -14,7 +14,6 @@ export const TransactionHistory = () => {
   const getTrx = async () => {
     try {
       const data = await fetchTransactionHistory();
-      console.log(data);
       if (data.success) {
         setTrxHistory(data.transactionH);
       } else {

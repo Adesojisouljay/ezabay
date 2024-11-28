@@ -18,7 +18,6 @@ export const ConfirmDepositPage = () => {
   const getDeposits = async () => {
     try {
       const response = await getAllDeposits();
-      console.log(response);
       setDeposits(response?.deposits);
     } catch (error) {
       console.error('Error fetching deposits:', error);

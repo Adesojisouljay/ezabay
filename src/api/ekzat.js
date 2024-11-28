@@ -3,7 +3,6 @@ import {api} from './axiosInstance';
 const authToken = localStorage.getItem('token');
 
 export const createMerchant = async (merchantData) => {
-    console.log("authToken.....",authToken)
   try {
     const response = await api.post('/merchant/apply', merchantData, {
       headers: {
@@ -178,7 +177,6 @@ export const createNairaDepositRequest = async (depositData) => {
 //////BUYING AND SELLING
 
 export const buyAsset = async (assetData) => {
-  console.log(authToken)
   try {
     const response = await api.post(`/transactions/buy`, assetData, {
       headers: {
@@ -233,7 +231,6 @@ export const addBankAccount = async (accountDetails) => {
         'Authorization': authToken
       }
     });
-    console.log(response.data);
   } catch (error) {
     console.error('Error adding bank account:', error);
   }
@@ -249,7 +246,6 @@ export const deleteBankAccount = async (accountId) => {
       },
       data: { accountId }
     });
-    console.log(response.data);
   } catch (error) {
     console.error('Error deleting bank account:', error);
   }
@@ -328,7 +324,6 @@ export const getAllFiatDeposits = async () => {
     const response = await api.get('/deposits/fiat', {
       headers: { Authorization: authToken },
     });
-    console.log(response)
     return response.data;
   } catch (error) {
     console.error('Failed to fetch fiat deposits:', error);
@@ -397,7 +392,6 @@ export const fetchCryptoData = async () => {
 };
 
 export const addAsset = async (coinId) => {
-  console.log(coinId)
   try {
     const response = await api.post(
       '/auth/add-asset',
@@ -420,7 +414,6 @@ export const addAsset = async (coinId) => {
 
 /////not needed
 export const removeAsset = async (coinId) => {
-  console.log(coinId)
   try {
     const response = await api.post(
       '/auth/remove-asset',
@@ -443,7 +436,6 @@ export const removeAsset = async (coinId) => {
 
 ///not needed again i have added all in add asset func
 export const generateAddress = async (coinId) => {
-  console.log(coinId)
   try {
     const response = await api.put(
       '/auth/generate-address',
@@ -457,7 +449,7 @@ export const generateAddress = async (coinId) => {
       }
     );
 
-    console.log('Wallet address generated successfully:', response.data);
+    console.log('Wallet address generated successfully:');
     return response.data;
   } catch (error) {
     console.error('Failed to generate wallet address:', error.response?.data?.message || error.message);

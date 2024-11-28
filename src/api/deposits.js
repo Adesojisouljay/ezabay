@@ -9,7 +9,6 @@ export const initiateDeposit = async (depositData) => {
         Authorization: `${authToken}`,
       },
     });
-    console.log(response)
     if (response.data.success) {
       console.log('Deposit request initiated successfully');
     } else {

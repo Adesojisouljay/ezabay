@@ -17,7 +17,6 @@ export const WalletPage = () => {
   const user = useSelector((state) => state.ekzaUser.user);
   const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
   const dispatch = useDispatch()
-  console.log(user)
 
   useEffect(() => {
     getCryptoData();
@@ -89,8 +88,6 @@ export const WalletPage = () => {
   const removeTokenFromWallet = async (coinId) => {
     try {
       const response = await removeAsset(coinId)
-      console.log(coinId)
-      console.log(response)
         toast.success("remove...",{
           style: {
             backgroundColor: 'rgba(229, 229, 229, 0.1)',

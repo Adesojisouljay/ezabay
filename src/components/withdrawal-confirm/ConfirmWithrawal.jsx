@@ -18,7 +18,6 @@ export const ConfirmWithdrawalPage = () => {
   const getWithdrawals = async () => {
     try {
       const response = await getAllWithdrawals();
-      console.log(response);
       setWithdrawals(response?.withdrawals);
     } catch (error) {
       console.error('Error fetching withdrawals:', error);

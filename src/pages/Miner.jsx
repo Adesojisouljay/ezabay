@@ -18,7 +18,6 @@ export const Miner = () => {
   useEffect(() => {
     if(global.ekzaUser?.isAuthenticated) {
       getMiningRecord()
-      // console.log(global.ekzaUser.user?.balance > 0)
     } else {
       navigate("/login")
     }
@@ -74,7 +73,6 @@ export const Miner = () => {
   };
 
   const handleWithdraw = (amount) => {
-    console.log('Withdraw amount:', amount);
     setIsWithdrawalModalOpen(false);
   };
 

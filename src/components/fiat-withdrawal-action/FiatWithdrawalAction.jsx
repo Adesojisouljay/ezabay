@@ -21,7 +21,6 @@ export const FiatWithdrawalAction = () => {
     setIsLoading(true);
     try {
       const response = await getAllFiatWithdrawals();
-      console.log(response);
       setWithdrawals(response.withdrawals);
     } catch (error) {
       toast.error('Failed to fetch fiat withdrawals', {

@@ -42,7 +42,6 @@ export const getAllDeposits = async () => {
   };
 
 export const cancelDeposit = async (depositId) => {
-  console.log(depositId)
   const adminToken = localStorage.getItem('token');
   try {
     const config = {
@@ -51,7 +50,6 @@ export const cancelDeposit = async (depositId) => {
       },
     };
     const response = await api.put(`/deposits/cancel/${depositId}`, null, config);
-    console.log(response)
     return response.data;
   } catch (error) {
     console.error('Error canceling deposit request:', error);

@@ -8,7 +8,6 @@ import './add-bank-account.scss';
 export const BankAccount = ({ authToken }) => {
   const user = useSelector(state => state.ekzaUser.user);
   const dispatch = useDispatch();
-  console.log(user.account)
 
   const [accountNumber, setAccountNumber] = useState('');
   const [accountName, setAccountName] = useState('');
@@ -70,7 +69,6 @@ export const BankAccount = ({ authToken }) => {
     setDeleting(true)
     try {
       const data = await deleteBankAccount(id);
-      console.log(data)
       getUserProfile(dispatch)
       setDeleting(false)
     } catch (error) {

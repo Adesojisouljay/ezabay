@@ -37,7 +37,6 @@ export const Profile = () => {
 
   const appBaseUrl = window.location.origin
 const userReferralLink = `${appBaseUrl}/register?referral=${user.userMemo}`
-console.log(userReferralLink)
 
   const handleEdit = () => {
     setEditMode(true);
@@ -107,9 +106,7 @@ const handleCopyMemo = () => {
 };
 
 const handleCurrencyChange = (currency) => {
-  console.log(currency)
   const selectedC = currenciesList.find(c => c.name === currency);
-  console.log(selectedC)
   dispatch(setCurrency(currency));
 };
 

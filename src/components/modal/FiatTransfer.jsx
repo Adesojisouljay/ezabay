@@ -62,7 +62,6 @@ export const DepositModal = ({ isOpen, onClose }) => {
     try {
 
       const data = await getReceiverProfile(receiver);
-      console.log(data)
       setReceiverInfo(data)
       setLoading(false);
 

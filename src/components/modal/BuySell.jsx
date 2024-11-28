@@ -21,7 +21,6 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
 
   const user = useSelector((state) => state.ekzaUser.user);
   const global = useSelector((state) => state);
-  console.log(user)
 
   const [openList, setOpenList] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +45,6 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
     setConversionResult(null);
     debouncedHandleCalculate(amount);
   }, [amount, currency]);
-  console.log(conversionResult); 
 
   const handleCalculate = async (a) => {
     if (!a) {
