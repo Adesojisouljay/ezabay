@@ -21,7 +21,7 @@ import { currenciesList } from "../vairables/protectedRoutes";
 import { GeneralDropdown } from "../components/dropdown/GeneralDrpdpown";
 
 export const Dashboard = () => {
-  const user = useSelector((state) => state.ekzaUser.user);
+  const user = useSelector((state) => state.ekzaUser?.user);
   const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
   const dispatch = useDispatch();
   const assets = user?.assets || [];
@@ -264,7 +264,12 @@ export const Dashboard = () => {
                     <div>
                       <span className="asset-b">{a.balance.toFixed(3)}</span>
                     </div>
-                    <span className="asset-v">{a.nairaValue.toFixed(2)}</span>
+                    <span className="asset-v">
+                      {selectedCurrency === 'USD'
+                        ? `$${formatNumberWithCommas(a.balance * a.usdValue)}`
+                        : `₦${formatNumberWithCommas(a.balance * a.nairaValue)}`
+                        }
+                    </span>
                     <div>
                       <span className={`asset-percent ${a.percentageChange < 0 ? "red" : "green"}`}
                         style={{

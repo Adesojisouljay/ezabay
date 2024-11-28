@@ -13,7 +13,7 @@ export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) =
     const [filteredData, setFilteredData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const currencySymbol = global.currency.selectedCurrency === "USD" ? "$" : "N";
+    const currencySymbol = global.currency.selectedCurrency === "USD" ? "$" : "₦";
 
     useEffect(() => {
         getCryptoData();
