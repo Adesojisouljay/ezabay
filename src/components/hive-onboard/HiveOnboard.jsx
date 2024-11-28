@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Loader } from "../loader/Loader";
 import { useSelector } from "react-redux";
 import { MdOutlineDownload } from "react-icons/md";
 import { getAccount } from "../../hive-client";
 import { createHiveAccount, getAccountKeys } from '../../api/hive';
+import { validateHiveUsername } from "../../utils";
 import success from "../../assets/succes.gif";
 import "./index.scss";
 
@@ -11,15 +12,18 @@ export const HiveOnboard = () => {
 
     const user = useSelector((state) => state.ekzaUser.user);
     const hiveAsset = user?.assets[0]
-  const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [step, setStep] = useState(1);
-  const [newHiveAccount, setNewHiveAccount] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [usernameAvailable, setUsernameAvailable] = useState(null);
-  const [isDownloaded, setIsDownloaded] = useState(false);
-  const [feeType, setFeeType] = useState('hive')
+    const [loading, setLoading] = useState(false);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [step, setStep] = useState(1);
+    const [newHiveAccount, setNewHiveAccount] = useState(null);
+    const [message, setMessage] = useState(null);
+    const [usernameAvailable, setUsernameAvailable] = useState(null);
+    const [usernameValid, setUsernameValid] = useState(null);
+    const [isDownloaded, setIsDownloaded] = useState(false);
+    const [feeType, setFeeType] = useState('hive');
+
+      const debounceTimer = useRef(null);
 
   useEffect(() => {
     if (username) {
@@ -31,20 +35,41 @@ export const HiveOnboard = () => {
 
   const getExistingHiveAccount = async () => {
     setLoading(true);
+    validateUsernameWithDelay(username);
     try {
       const account = await getAccount(username);
       if (account) {
         setMessage("Username is already taken");
-        setUsernameAvailable(true);
+        setUsernameAvailable(false);
       } else {
         setMessage("Username Available ✅");
-        setUsernameAvailable(false);
+        setUsernameAvailable(true);
       }
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
+  };
+
+  const validateUsernameWithDelay = (newUsername) => {
+    clearTimeout(debounceTimer.current);
+
+    debounceTimer.current = setTimeout(() => {
+      const isValid = validateHiveUsername(newUsername, setMessage);
+      if (isValid) {
+        console.log("Username is valid!");
+        setUsernameValid(true)
+      } else {
+        console.log("Username validation failed.");
+        setUsernameValid(false)
+      }
+    }, 500);
+  };
+
+  const usernameChanged = (e) => {
+    const newUsername = e.target.value;
+    setUsername(newUsername);
   };
 
  const getkeys = async (e) => {
@@ -144,7 +169,7 @@ export const HiveOnboard = () => {
         {step === 1 && (
           <>
             <h1>Create Hive Account</h1>
-            <span className={usernameAvailable ? "warning" : "success"}>
+            <span className={(!usernameAvailable || !usernameValid) ? "warning" : "success"}>
               {message}
             </span>
             <form onSubmit={getkeys}>
@@ -154,7 +179,7 @@ export const HiveOnboard = () => {
                 <input
                   type={"text"}
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={usernameChanged}
                   placeholder="Pick a username"
                   required
                 />
@@ -193,10 +218,10 @@ export const HiveOnboard = () => {
                 </div>
               <button
                 style={{
-                  cursor: (loading || usernameAvailable) && "not-allowed",
+                  cursor: (loading || !usernameAvailable || !usernameValid) && "not-allowed",
                 }}
                 className="onboard-btn"
-                disabled={loading || usernameAvailable}
+                disabled={loading || !usernameAvailable || !usernameValid}
                 type="submit"
               >
                 Proceed

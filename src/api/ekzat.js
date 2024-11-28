@@ -29,9 +29,9 @@ export const getAllMerchants = async () => {
   }
 };
 
-export const getMerchantById = async (id) => {
+export const getMerchantById = async () => {
   try {
-    const response = await api.get(`/merchant/${id}`, {
+    const response = await api.get(`/merchant/single`, {
       headers: {
         Authorization: authToken,
       },
