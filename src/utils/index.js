@@ -81,4 +81,10 @@ export const isTokenValid = (token) => {
 
 export const getFirstItem = string => Number(string?.split(" ")[0])
 
-    
+export const formatNumberWithCommas = (num) => {
+
+  return Number(num).toLocaleString("en-US", {
+    maximumFractionDigits: 3,
+    useGrouping: true,
+  });
+};

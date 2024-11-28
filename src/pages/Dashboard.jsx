@@ -10,7 +10,7 @@ import { DepositModal } from "../components/modal/FiatTransfer";
 import { BuySellModal } from "../components/modal/BuyAndSell";
 import { FiatWithdrawalModal } from "../components/modal/FiatWithdrawal";
 import { setCurrency } from "../redux/currencySlice";
-import { usdPrice } from "../utils";
+import { usdPrice, formatNumberWithCommas } from "../utils";
 import { ListedTokens } from "../components/listed-tokens/ListedTokens";
 import { HiCircleStack, HiArrowUpCircle, HiArrowDownCircle, HiMiniShoppingCart, HiFolderPlus, HiFolderMinus } from "react-icons/hi2"
 import { TransactionHistory } from "../components/transaction-history/TransactionHistory";
@@ -64,6 +64,7 @@ export const Dashboard = () => {
   const toggleBalanceView = () => {
     setShowBalance(!showBalance);
   };
+
   const handleOpenAsset = () => {
     setAssetOpen(!assetOpen);
   };
@@ -168,7 +169,7 @@ export const Dashboard = () => {
                   <span>
                   <span className="dashboard-currency-symbol">{isUsd ? "$" : "₦"}</span>
                   {isUsd ? new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance / usdPrice)
-                    : new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance)}
+                    : formatNumberWithCommas(user?.nairaBalance)}
                  </span>)}
                 </div>
               </div>
@@ -249,8 +250,8 @@ export const Dashboard = () => {
               <p style={{ marginBottom: 10 }}>
                 Balance:{" "}
                 {selectedCurrency === "USD"
-                  ? `$${user?.totalUsdValue?.toFixed(4)}`
-                  : `₦${user?.totalNairaValue?.toFixed(4)}`}
+                  ? `$${formatNumberWithCommas(user?.totalUsdValue)}`
+                  : `₦${formatNumberWithCommas(user?.totalNairaValue)}`}
               </p>
 
               <div className="card-component-wrap">
