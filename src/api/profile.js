@@ -12,7 +12,6 @@ export const getUserProfile = async (dispatch) => {
       };
 
     const response = await api.get('/auth/profile', config);
-    console.log(response)
     if (response.data.success) {
       dispatch(updateUser({ user: response.data.user }));
       return response; 

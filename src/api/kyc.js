@@ -16,9 +16,9 @@ export const submitKYC = async (kycData) => {
     );
 
     if (response.data.success) {
-      console.log('KYC submitted successfully:', response.data.message);
+      console.log('KYC submitted successfully:');
     } else {
-      console.error('KYC submission failed:', response.data.message);
+      console.error('KYC submission failed:');
     }
   } catch (error) {
     console.error('Error submitting KYC:', error.message);
@@ -62,9 +62,9 @@ export const rejectKYC = async (kycId) => {
     );
 
     if (response.data.success) {
-      console.log('KYC rejected successfully:', response.data.message);
+      console.log('KYC rejected successfully:');
     } else {
-      console.error('KYC rejection failed:', response.data.message);
+      console.error('KYC rejection failed:');
     }
   } catch (error) {
     console.error('Error rejecting KYC:', error.message);
@@ -81,10 +81,10 @@ export const getAllKYC = async () => {
     });
 
     if (response.data.success) {
-      console.log('Fetched all KYC records:', response.data.data);
+      console.log('Fetched all KYC records:');
       return response.data.data;
     } else {
-      console.error('Failed to fetch KYC records:', response.data.message);
+      console.error('Failed to fetch KYC records:');
       return [];
     }
   } catch (error) {

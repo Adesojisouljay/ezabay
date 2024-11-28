@@ -12,7 +12,6 @@ export const SingleCoinInfo = () => {
   const [timeRange, setTimeRange] = useState('1'); 
 
   const params = useParams()
-  console.log(params.id)
 
   const coinIds = "ids=bitcoin,hive,hive_dollar,tether,dogecoin,tron,toncoin,gala,solana,ethereum";
 

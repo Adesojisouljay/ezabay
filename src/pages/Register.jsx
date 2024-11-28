@@ -15,7 +15,6 @@ const Register = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location?.search);
   const referralCodeFromURL = queryParams?.get('referral');
-  console.log(referralCodeFromURL);
 
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -84,9 +83,7 @@ const Register = () => {
 
   const handleCountryChange = (country) => {
     const selectedC = countries.find(c => c === country);
-    console.log(selectedC)
     setSelectedCountry(selectedC)
-    
   };
 
   const handleOpenList = () => {

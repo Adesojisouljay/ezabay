@@ -11,7 +11,6 @@ export const Kyc = () => {
   const user = useSelector(state => state?.ekzaUser?.user);
   const dispatch = useDispatch();
 
-  console.log(user)
   const [step, setStep] = useState(1);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

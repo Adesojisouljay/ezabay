@@ -10,7 +10,6 @@ import succesicon from "../../assets/succes.gif"
 export const AddAccount = ({ isOpen, onClose }) => {
   const user = useSelector(state => state.ekzaUser.user);
   const dispatch = useDispatch();
-  console.log(user.accounts)
 
   const [accountNumber, setAccountNumber] = useState('');
   const [accountName, setAccountName] = useState('');
@@ -77,7 +76,6 @@ export const AddAccount = ({ isOpen, onClose }) => {
     setDeleting(true)
     try {
       const data = await deleteBankAccount(id);
-      console.log(data)
       getUserProfile(dispatch)
       setDeleting(false)
     } catch (error) {

@@ -118,9 +118,7 @@ export const Dashboard = () => {
   };
 
   const handleCurrencyChange = (currency) => {
-    console.log(currency)
     const selectedC = currenciesList.find(c => c.name === currency);
-    console.log(selectedC)
     dispatch(setCurrency(currency));
   };
 

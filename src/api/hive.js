@@ -1,6 +1,5 @@
 import {api} from './axiosInstance';
 const authToken = localStorage.getItem('token')
-console.log(authToken)
 
 export const createHiveAccount = async (hiveAccountData) => {
   
@@ -17,7 +16,6 @@ export const createHiveAccount = async (hiveAccountData) => {
   };
 
   export const getAccountKeys = async (username) => {
-    console.log(username)
       try {
         const response = await api.post('/hive//get-account-keys', {username});
         return response.data;

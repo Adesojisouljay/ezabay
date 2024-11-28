@@ -14,7 +14,6 @@ export const SingleCommunityPost = () => {
         const fetchPost = async () => {
             try {
                 const fetchedPost = await getPost(author, permlink);
-                console.log(fetchedPost)
                 if (fetchedPost) {
                     setPost(fetchedPost);
                 } else {

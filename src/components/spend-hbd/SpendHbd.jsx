@@ -79,9 +79,7 @@ export const SpendHbd = () => {
           const days = Math.floor(secondsAgo / 86400);
           return `${days} days ago`;
         }
-      }
-    console.log(posts)
-    
+      }    
 
     return (
         <div className="spend-hbd-container">

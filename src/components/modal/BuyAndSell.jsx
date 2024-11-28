@@ -99,8 +99,6 @@ export const BuySellModal = ({
         transactionType,
         signal, // Pass signal to fetch request
       });
-      console.log(a);
-      console.log(conversionData);
       if (conversionData.success === true) {
         setConversionResult(conversionData);
         setIsLoading(false);
@@ -110,7 +108,6 @@ export const BuySellModal = ({
       }
     } catch (error) {
       if (error.name === "AbortError") {
-        console.log("Fetch aborted");
       } else {
         setMessage(error.message || "An error occurred during calculation");
       }
@@ -156,10 +153,6 @@ export const BuySellModal = ({
         currency,
         amountType,
       };
-      console.log(
-        Number(conversionResult?.convertedCryptoAmount.split(" ")[0]) + 1
-      );
-      console.log(transactionData);
 
       if (transactionType === "buy") {
         await buyAsset(transactionData);
@@ -197,7 +190,6 @@ export const BuySellModal = ({
   {"img": usdc, "name": "Bnb"},
   {"img": usdt, "name": "Dash"},
  ]
- console.log(assets)
   return (
     <div className={`fadded-container modal-overlay ${isOpen ? "open" : ""}`}>
       <div
