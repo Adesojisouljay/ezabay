@@ -91,7 +91,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
     {/* <div className={`modal-overlay ${isOpen ? 'open' : ''}`}> */}
       <div className="modal testing">
         <span className="close-modal" onClick={onClose}>X</span>
-        <h2 className='w-header'>Withdrawal</h2>
+        <h2 className='w-header'>Send</h2>
         {message && <p className='warning'>{message}</p>}
         {step === 1 && <div className="w-input-group">
 
@@ -138,7 +138,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
               type="text"
               placeholder="Recipient Address"
               value={to}
-              onChange={(e) => setTo(e.target.value)}
+              onChange={(e) => setTo(e.target.value.toLowerCase())}
               id="recipient-account"
             />
            </div>

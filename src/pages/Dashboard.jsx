@@ -10,7 +10,7 @@ import { DepositModal } from "../components/modal/FiatTransfer";
 import { BuySellModal } from "../components/modal/BuyAndSell";
 import { FiatWithdrawalModal } from "../components/modal/FiatWithdrawal";
 import { setCurrency } from "../redux/currencySlice";
-import { usdPrice } from "../utils";
+import { usdPrice, formatNumberWithCommas } from "../utils";
 import { ListedTokens } from "../components/listed-tokens/ListedTokens";
 import { HiCircleStack, HiArrowUpCircle, HiArrowDownCircle, HiMiniShoppingCart, HiFolderPlus, HiFolderMinus } from "react-icons/hi2"
 import { TransactionHistory } from "../components/transaction-history/TransactionHistory";
@@ -64,6 +64,7 @@ export const Dashboard = () => {
   const toggleBalanceView = () => {
     setShowBalance(!showBalance);
   };
+
   const handleOpenAsset = () => {
     setAssetOpen(!assetOpen);
   };
@@ -163,10 +164,14 @@ export const Dashboard = () => {
                 />
 
                </div>
-                <div className="bal-show-wrap">{showBalance ? <h3>********</h3> : <span>
+               <div className="bal-show-wrap">
+                {showBalance ? ( <h3>********</h3> ) : (
+                  <span>
                   <span className="dashboard-currency-symbol">{isUsd ? "$" : "₦"}</span>
-                  {isUsd ? (user?.nairaBalance / usdPrice)?.toFixed(3) : user?.nairaBalance.toFixed(3)}
-                </span>}</div>
+                  {isUsd ? new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance / usdPrice)
+                    : formatNumberWithCommas(user?.nairaBalance)}
+                 </span>)}
+                </div>
               </div>
               <div className="bal-action-wrap">
                <FaRegEye className="show-balance" onClick={toggleBalanceView} />
@@ -175,18 +180,19 @@ export const Dashboard = () => {
             <div className="bal-btn-wrap-main"> 
 
             <div className="bal-btn-wrap">
+            <span className="bal-btn" onClick={openWithdrawalModal}>
+                <div className="bal-icon-wrap">
+                <HiArrowUpCircle size={30} />
+                </div>
+                <span>Send</span>
+              </span>
               <span className="bal-btn" onClick={() => openDepositModal(assets[0])}>
                 <div className="bal-icon-wrap">
                 <HiArrowDownCircle size={30} />
                 </div>
-                <span>Deposit</span>
+                <span>Receive</span>
               </span>
-              <span className="bal-btn" onClick={openWithdrawalModal}>
-                <div className="bal-icon-wrap">
-                <HiArrowUpCircle size={30} />
-                </div>
-                <span>Recieve</span>
-              </span>
+              
     
               <span className="bal-btn" onClick={()=> openBuySellModal("buy")}>
                 <div className="bal-icon-wrap">
@@ -244,8 +250,8 @@ export const Dashboard = () => {
               <p style={{ marginBottom: 10 }}>
                 Balance:{" "}
                 {selectedCurrency === "USD"
-                  ? `$${user?.totalUsdValue?.toFixed(4)}`
-                  : `₦${user?.totalNairaValue?.toFixed(4)}`}
+                  ? `$${formatNumberWithCommas(user?.totalUsdValue)}`
+                  : `₦${formatNumberWithCommas(user?.totalNairaValue)}`}
               </p>
 
               <div className="card-component-wrap">

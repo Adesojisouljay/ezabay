@@ -69,7 +69,8 @@ export const HiveOnboard = () => {
 
   const usernameChanged = (e) => {
     const newUsername = e.target.value;
-    setUsername(newUsername);
+    setUsername(newUsername.toLowerCase());
+    console.log(username)
   };
 
  const getkeys = async (e) => {

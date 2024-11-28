@@ -89,7 +89,7 @@ const closePassword = () => {
             <input
               type={"email" | "text"}
               value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
+              onChange={(e) => setIdentifier(e.target.value.toLowerCase())}
               placeholder="Enter your email"
               required
             />

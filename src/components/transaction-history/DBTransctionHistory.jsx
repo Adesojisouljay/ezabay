@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTransactionHistory } from '../../api/transaction';
+import { formatNumberWithCommas } from '../../utils';
 import "./dbtransactionhistory.scss";
 
 function DBTransctionHistory() {
@@ -82,7 +83,7 @@ function DBTransctionHistory() {
                         : ""
                     }
                     >
-                    {t.amount}
+                    {formatNumberWithCommas(t.amount)}
                     </td>
                     <td>
                     {t.trxId.slice(0, 5)}...{t.trxId.slice(-5)}

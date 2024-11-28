@@ -172,7 +172,6 @@ export const validateHiveUsername = (username, setError) => {
     return false;
   }
 
-  // Ensure all parts between dots have at least 3 characters
   const parts = username.split(".");
   for (const part of parts) {
     if (part.length < 3) {
@@ -181,7 +180,7 @@ export const validateHiveUsername = (username, setError) => {
     }
   }
 
-  // Regex to validate Hive username rules (dots, hyphens, and alphanumeric)
+  //validate Hive username rules (dots, hyphens, and alphanumeric)
   const regex = /^(?!.*--)(?!.*\.\.)(?!.*-\.)[a-z0-9]+([-\.][a-z0-9]+)*$/;
 
   if (!regex.test(username)) {
@@ -192,4 +191,11 @@ export const validateHiveUsername = (username, setError) => {
   }
 
   return true;
+};
+export const formatNumberWithCommas = (num) => {
+
+  return Number(num).toLocaleString("en-US", {
+    maximumFractionDigits: 3,
+    useGrouping: true,
+  });
 };
