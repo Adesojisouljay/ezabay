@@ -61,22 +61,22 @@ export const MerchantAction = () => {
     }
   };
 
-//   const handleUpdate = async (id, updatedData) => {
-//     try {
-//       const result = await updateMerchant(id, updatedData);
-//       if (result.success) {
-//         setMerchants((prevMerchants) => 
-//           prevMerchants.map((merchant) =>
-//             merchant._id === id ? { ...merchant, ...updatedData } : merchant
-//           )
-//         );
-//       } else {
-//         setError(result.message || 'Error updating merchant');
-//       }
-//     } catch (err) {
-//       setError('Error updating merchant');
-//     }
-//   };
+  const handleUpdate = async (id, updatedData) => {
+    try {
+      const result = await updateMerchant(id, updatedData);
+      if (result.success) {
+        setMerchants((prevMerchants) => 
+          prevMerchants.map((merchant) =>
+            merchant._id === id ? { ...merchant, ...updatedData } : merchant
+          )
+        );
+      } else {
+        setError(result.message || 'Error updating merchant');
+      }
+    } catch (err) {
+      setError('Error updating merchant');
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -148,12 +148,12 @@ export const MerchantAction = () => {
             </div>
             <div className="merchant-images">
               <img
-                src="https://via.placeholder.com/100"
+                src={merchant.residencePicture}
                 alt="merchant-pic"
                 onClick={() => handleImageClick('https://via.placeholder.com/100')}
               />
               <img
-                src="https://via.placeholder.com/100"
+                src={merchant.selfiePhotograph}
                 alt="merchant-doc"
                 onClick={() => handleImageClick('https://via.placeholder.com/100')}
               />

@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { createMerchant } from '../../api/ekzat';
 import './create-merchant.scss';
+import { GeneralDropdown } from '../dropdown/GeneralDrpdpown';
 
 export const CreateMerchantForm = () => {
   const [formData, setFormData] = useState({
@@ -25,11 +26,29 @@ export const CreateMerchantForm = () => {
   const [cameraActive1, setCameraActive1] = useState(false);
   const [cameraActive2, setCameraActive2] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [openCountryList, setOpenCountryList] = useState(false);
 
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
   const canvasRef1 = useRef(null);
   const canvasRef2 = useRef(null);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const data = await response.json();
+        const countryNames = data.map(country => country.name.common).sort();
+        setCountries(countryNames);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+  
+    fetchCountries();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -57,6 +76,7 @@ export const CreateMerchantForm = () => {
         ...formData,
         selfiePhotograph: selfiePhotographUrl,
         residencePicture: residencePictureUrl,
+        country: selectedCountry
       };
 
       const result = await createMerchant(updatedFormData);
@@ -107,6 +127,17 @@ export const CreateMerchantForm = () => {
     }
   };
 
+  const handleCountryChange = (country) => {
+    const selectedC = countries.find(c => c === country);
+    console.log(selectedC)
+    setSelectedCountry(selectedC)
+    
+  };
+
+  const handleOpenList = () => {
+    setOpenCountryList(!openCountryList);
+  };
+
   return (
     <div className="create-merchant-form">
       {isSubmitted ? (
@@ -136,6 +167,16 @@ export const CreateMerchantForm = () => {
           <div className="form-group">
             <label htmlFor="bankName">Bank Name</label>
             <input type="text" id="bankName" name="bankName" value={formData.bankName} onChange={handleChange} required />
+          </div>
+          <div className="form-group">
+            <label>Country</label>
+            <GeneralDropdown
+                  items={countries}
+                  setSelectedItem={handleCountryChange} 
+                  handleOpenList={handleOpenList} 
+                  openList={openCountryList}
+                  itemName={selectedCountry}
+                />
           </div>
           <div className="form-group">
             <label htmlFor="residentialAddress">Residential Address</label>
