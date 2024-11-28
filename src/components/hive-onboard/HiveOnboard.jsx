@@ -154,7 +154,7 @@ export const HiveOnboard = () => {
                 <input
                   type={"text"}
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value.toLowerCase())}
                   placeholder="Pick a username"
                   required
                 />

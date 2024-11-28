@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchCryptoData } from '../../api/ekzat';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { formatNumberWithCommas } from '../../utils';
 import './listed-tokens.scss';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
@@ -74,7 +75,7 @@ export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) =
                                 <div className="token-content-wrap">
                                 <Link to={`/coin/${coin.id}`} className="token-name-link">
                                         {coin.name}
-                                    </Link> <span className="token-price">{currencySymbol}{coin.current_price.toLocaleString()}</span>
+                                    </Link> <span className="token-price">{currencySymbol}{formatNumberWithCommas(coin.current_price)}</span>
                                 </div>
                                 <div className={`token-content-wrap ${percentageChangeClass}`}>
                                     <span className="token-symbol">{coin?.symbol.toUpperCase()}</span>

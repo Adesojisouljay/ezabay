@@ -74,7 +74,7 @@ export const DepositHiveModal = ({ isOpen, onClose, assets, user }) => {
     <div className={`modal-overlay  ${isOpen ? 'open' : ''}`} onClick={onClose}> </div>
       <div className="modal ">
         <span className="close-modal" onClick={onClose}>X</span>
-        <h2 className='d-header'>Deposit</h2>
+        <h2 className='d-header'>Receive</h2>
         <div className='d-main'>
           <div className='d-coin-select-wrapper'>
             <span>{selectedAsset?.currency}</span>
