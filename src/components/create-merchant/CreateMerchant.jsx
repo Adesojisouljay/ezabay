@@ -4,6 +4,7 @@ import axios from 'axios';
 import { createMerchant } from '../../api/ekzat';
 import './create-merchant.scss';
 import { GeneralDropdown } from '../dropdown/GeneralDrpdpown';
+import { countriesList } from '../../vairables/countries';
 
 export const CreateMerchantForm = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,6 @@ export const CreateMerchantForm = () => {
   const [cameraActive1, setCameraActive1] = useState(false);
   const [cameraActive2, setCameraActive2] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [openCountryList, setOpenCountryList] = useState(false);
 
@@ -35,20 +35,20 @@ export const CreateMerchantForm = () => {
   const canvasRef1 = useRef(null);
   const canvasRef2 = useRef(null);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch('https://restcountries.com/v3.1/all');
-        const data = await response.json();
-        const countryNames = data.map(country => country.name.common).sort();
-        setCountries(countryNames);
-      } catch (error) {
-        console.error('Error fetching countries:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCountries = async () => {
+  //     try {
+  //       const response = await fetch('https://restcountries.com/v3.1/all');
+  //       const data = await response.json();
+  //       const countryNames = data.map(country => country.name.common).sort();
+  //       setCountries(countryNames);
+  //     } catch (error) {
+  //       console.error('Error fetching countries:', error);
+  //     }
+  //   };
   
-    fetchCountries();
-  }, []);
+  //   fetchCountries();
+  // }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -128,7 +128,7 @@ export const CreateMerchantForm = () => {
   };
 
   const handleCountryChange = (country) => {
-    const selectedC = countries.find(c => c === country);
+    const selectedC = countriesList.find(c => c === country);
     setSelectedCountry(selectedC)
     
   };
@@ -170,7 +170,7 @@ export const CreateMerchantForm = () => {
           <div className="form-group">
             <label>Country</label>
             <GeneralDropdown
-                  items={countries}
+                  items={countriesList}
                   setSelectedItem={handleCountryChange} 
                   handleOpenList={handleOpenList} 
                   openList={openCountryList}
