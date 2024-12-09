@@ -9,6 +9,7 @@ import { Loader } from '../components/loader/Loader';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { GeneralDropdown } from '../components/dropdown/GeneralDrpdpown';
 import { toast } from 'react-toastify';
+import { countriesList } from '../vairables/countries';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -37,20 +38,21 @@ const Register = () => {
     }
   }, [referralCodeFromURL]);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch('https://restcountries.com/v3.1/all');
-        const data = await response.json();
-        const countryNames = data.map(country => country.name.common).sort();
-        setCountries(countryNames);
-      } catch (error) {
-        console.error('Error fetching countries:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCountries = async () => {
+  //     try {
+  //       const response = await fetch('https://restcountries.com/v3.1/all');
+  //       const data = await response.json();
+  //       const countryNames = data.map(country => country.name.common).sort();
+  //       console.log("response.......", response)
+  //       setCountries(countryNames);
+  //     } catch (error) {
+  //       console.error('Error fetching countries:', error);
+  //     }
+  //   };
   
-    fetchCountries();
-  }, []);
+  //   fetchCountries();
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +84,7 @@ const Register = () => {
   };
 
   const handleCountryChange = (country) => {
-    const selectedC = countries.find(c => c === country);
+    const selectedC = countriesList.find(c => c === country);
     setSelectedCountry(selectedC)
   };
 
@@ -149,7 +151,7 @@ const Register = () => {
           <div className="reg-form-group">
             <label>Country</label>
             <GeneralDropdown
-                  items={countries}
+                  items={countriesList}
                   setSelectedItem={handleCountryChange} 
                   handleOpenList={handleOpenList} 
                   openList={openCountryList}
