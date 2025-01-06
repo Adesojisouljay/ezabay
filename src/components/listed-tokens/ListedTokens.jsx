@@ -26,7 +26,7 @@ export const ListedTokens = ( {searchQuery, setSearchQuery, openBuySellModal}) =
     const getCryptoData = async () => {
         try {
             const response = await fetchCryptoData();
-            console.log(response)
+            console.log("........",response)
     
             if (response?.data?.success) {
                 const { usdData, ngnData, mxnData } = response.data.cryptoData;

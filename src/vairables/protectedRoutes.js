@@ -29,12 +29,13 @@ export  const protectedRoutesArray = [
       sign: "$",
       image: Usa
     },
-    {
-      country: "Mexico",
-      name: "MXN",
-      sign: "MX$",
-      image: Mexico
-    }
+    ////to be added once backend is okay
+    // {
+    //   country: "Mexico",
+    //   name: "MXN",
+    //   sign: "MX$",
+    //   image: Mexico
+    // }
   ]
 
   export const userAvatar = "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"

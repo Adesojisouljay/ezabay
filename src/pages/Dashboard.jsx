@@ -19,6 +19,7 @@ import DBTransctionHistory from "../components/transaction-history/DBTransctionH
 import { BuySell } from "../components/modal/BuySell";
 import { currenciesList } from "../vairables/protectedRoutes";
 import { GeneralDropdown } from "../components/dropdown/GeneralDrpdpown";
+import TransactionList from "../components/modal/TransactionList";
 
 export const Dashboard = () => {
   const user = useSelector((state) => state.ekzaUser?.user);
@@ -31,6 +32,7 @@ export const Dashboard = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [withdrawalOpen, setWithdrawalOpen] = useState(false);
+  const [trxListOpen, setTrxListOpen] = useState(false)
   const [action, setAction] = useState(false);
   const [fiatDepositOpen, setFiatDepositOpen] = useState(false);
   const [fiatWithdrawalOpen, setFiatWithdrawalOpen] = useState(false);
@@ -43,7 +45,9 @@ export const Dashboard = () => {
   const [buySellOpen, setBuySellOpen] = useState(false);
   const [openList, setOpenList] = useState(false);
   const [assetOpen, setAssetOpen] = useState(false)
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(true)
+  const [trxListData, setTrxListData] = useState(null)
+  console.log(trxListData)
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -118,6 +122,10 @@ export const Dashboard = () => {
   const closeBuySellModal = () => {
     setBuySellOpen(false);
   };
+  const closeTrxListModal = () => {
+    setTrxListOpen(false);
+  };
+
 
   const handleCurrencyChange = (currency) => {
     const selectedC = currenciesList.find(c => c.name === currency);
@@ -318,7 +326,7 @@ export const Dashboard = () => {
                 <ListedTokens setSearchQuery={setSearchQueryCoinPrice} searchQuery={searchQueryCoinPrice} openBuySellModal={openBuySellModal}  />
             </div>
             <div className={`transction-component ${activeTab === 'transaction' ? 'activetab' : ''}`}>
-                <DBTransctionHistory  />
+                <DBTransctionHistory  setTrxListOpen={setTrxListOpen} setTrxListData={setTrxListData}  />
             </div>
             <div className={`stake-component ${activeTab === 'stake' ? 'activetab' : ''}`}>
               <h1>Staking is coming soon</h1>
@@ -366,6 +374,7 @@ export const Dashboard = () => {
       {fiatTransferOpen && <DepositModal isOpen={fiatTransferOpen} onClose={closeFiatTransferModal} />}
       {fiatDepositOpen && <Fiatdeposit onClose={closeFiatDepositModal} isOpen={fiatDepositOpen} />}
       {fiatWithdrawalOpen && <FiatWithdrawalModal onClose={closeFiatWithdrawalModal} isOpen={fiatWithdrawalOpen} assets={assets} />}
+      {trxListOpen && <TransactionList isOpen={trxListOpen} onClose={closeTrxListModal} trxListData={trxListData} />}
     </div>
   );
 }
