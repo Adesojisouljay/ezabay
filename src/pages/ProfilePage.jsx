@@ -209,6 +209,7 @@ const idUpload = (e) => {
                   handleOpenList={handleOpenList} 
                   openList={openList}
                   itemName={selectedCurrency}
+                  selectLabal="currency"
                 />
 
                </div>

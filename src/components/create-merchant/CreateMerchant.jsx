@@ -175,6 +175,7 @@ export const CreateMerchantForm = () => {
                   handleOpenList={handleOpenList} 
                   openList={openCountryList}
                   itemName={selectedCountry}
+                  selectLabal="country"
                 />
           </div>
           <div className="form-group">
