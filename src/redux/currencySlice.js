@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import nigeria from "../assets/nigria.png"
 
 const initialState = {
-  selectedCurrency: 'NGN',
+  selectedCurrency: {
+    country: "Nigeria",
+    name: "NGN",
+    sign: "₦",
+    image: nigeria
+  },
 };
 
 const currencySlice = createSlice({
@@ -11,9 +17,12 @@ const currencySlice = createSlice({
     setCurrency: (state, action) => {
       state.selectedCurrency = action.payload;
     },
+    clearCurrency(state) {
+      state.selectedCurrency = null;
+    },
   },
 });
 
-export const { setCurrency } = currencySlice.actions;
+export const { setCurrency, clearCurrency } = currencySlice.actions;
 
 export const currencyReducer = currencySlice.reducer;

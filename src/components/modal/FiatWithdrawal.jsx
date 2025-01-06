@@ -219,6 +219,7 @@ export const FiatWithdrawalModal = ({ isOpen, onClose }) => {
                   handleOpenList={handleOpenList} 
                   openList={openList}
                   itemName={selectedAccount && selectedAccount?.bankName}
+                  selectLabal="account"
                  />
       
                 {selectedAccount?.accountNumber && (

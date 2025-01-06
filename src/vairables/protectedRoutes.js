@@ -1,5 +1,6 @@
 import nigeria from "../assets/nigria.png"
 import Usa from "../assets/Usa.webp"
+import Mexico from "../assets/mexico.png"
 
 export  const protectedRoutesArray = [
     '/dashboard',
@@ -17,15 +18,24 @@ export  const protectedRoutesArray = [
 
   export const currenciesList = [
     {
+      country: "Nigeria",
       name: "NGN",
       sign: "₦",
       image: nigeria
     },
     {
+      country: "Usa",
       name: "USD",
       sign: "$",
       image: Usa
-    }
+    },
+    ////to be added once backend is okay
+    // {
+    //   country: "Mexico",
+    //   name: "MXN",
+    //   sign: "MX$",
+    //   image: Mexico
+    // }
   ]
 
   export const userAvatar = "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg"

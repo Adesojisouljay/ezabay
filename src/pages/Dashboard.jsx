@@ -24,9 +24,10 @@ import TransactionList from "../components/modal/TransactionList";
 export const Dashboard = () => {
   const user = useSelector((state) => state.ekzaUser?.user);
   const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
+  const selectedCurrenc = useSelector((state) => state);
   const dispatch = useDispatch();
   const assets = user?.assets || [];
-  const isUsd = selectedCurrency === "USD";
+  // const isUsd = selectedCurrency === "USD";
 
   const [isOpen, setIsOpen] = useState(false);
   const [withdrawalOpen, setWithdrawalOpen] = useState(false);
@@ -45,7 +46,6 @@ export const Dashboard = () => {
   const [assetOpen, setAssetOpen] = useState(false)
   const [toggle, setToggle] = useState(true)
   const [trxListData, setTrxListData] = useState(null)
-  console.log(trxListData)
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -134,7 +134,6 @@ export const Dashboard = () => {
     setOpenList(!openList);
   };
 
-
   return (
     <div className="dashboard-container" onClick={actionToggleClose}>
       <div className="dashboard-content">
@@ -168,14 +167,16 @@ export const Dashboard = () => {
                   handleOpenList={handleOpenList} 
                   openList={openList}
                   itemName={selectedCurrency}
+                  selectLabal="currency"
                 />
 
                </div>
                <div className="bal-show-wrap">
                 {showBalance ? ( <h3>********</h3> ) : (
                   <span>
-                  <span className="dashboard-currency-symbol">{isUsd ? "$" : "₦"}</span>
-                  {isUsd ? new Intl.NumberFormat("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(user?.nairaBalance / usdPrice)
+                  <span className="dashboard-currency-symbol">{selectedCurrency?.sign}</span>
+                  {/* Should be properly handles when we finailise other country currency */}
+                  {selectedCurrency?.country === "Usa" ? formatNumberWithCommas(user?.nairaBalance / usdPrice)
                     : formatNumberWithCommas(user?.nairaBalance)}
                  </span>)}
                 </div>
@@ -254,12 +255,12 @@ export const Dashboard = () => {
               </div>
               </div>
               </div>
-              <p style={{ marginBottom: 10 }}>
+              {/* <p style={{ marginBottom: 10 }}>
                 Balance:{" "}
                 {selectedCurrency === "USD"
                   ? `$${formatNumberWithCommas(user?.totalUsdValue)}`
                   : `₦${formatNumberWithCommas(user?.totalNairaValue)}`}
-              </p>
+              </p> */}
 
               <div className="card-component-wrap">
                 {assets?.slice(0, 4).map((a) => (
@@ -273,12 +274,12 @@ export const Dashboard = () => {
                     <div>
                       <span className="asset-b">{a.balance.toFixed(3)}</span>
                     </div>
-                    <span className="asset-v">
+                    {/* <span className="asset-v">
                       {selectedCurrency === 'USD'
                         ? `$${formatNumberWithCommas(a.balance * a.usdValue)}`
                         : `₦${formatNumberWithCommas(a.balance * a.nairaValue)}`
                         }
-                    </span>
+                    </span> */}
                     <div>
                       <span className={`asset-percent ${a.percentageChange < 0 ? "red" : "green"}`}
                         style={{

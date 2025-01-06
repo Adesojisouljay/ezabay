@@ -5,6 +5,7 @@ import { persistor } from '../../redux/store';
 import './navbar.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/userReducer';
+import { clearCurrency } from '../../redux/currencySlice';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { formatDate, formatString } from '../../utils';
 import { PiGreaterThanBold } from 'react-icons/pi';
@@ -32,6 +33,7 @@ export const NavBar = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(clearCurrency());
      localStorage.removeItem("token")
     //  window.location.href = '/';
   };
