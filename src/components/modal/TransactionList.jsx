@@ -31,7 +31,6 @@ function TransactionList({ isOpen, onClose, trxListData: data }) {
                 </>
               )}
 
-              {data?.userId && <li><strong>User ID:</strong> {data.userId}</li>}
               {data?.trxId && <li><strong>Transaction ID:</strong> {data.trxId}</li>}
             </ul>
           ) : (

@@ -81,7 +81,7 @@ function DBTransactionHistory({ setTrxListOpen, setTrxListData }) {
               )}
 
               {currentTransactions.map((t, index) => (
-                <tr key={t.trxId} onClick={() => { setTrxListOpen(true); setTrxListData(t); }}>
+                <tr key={t.trxId} onClick={() => { setTrxListOpen(true); setTrxListData(t); }} className='transaction-row'>
                   <td className='phone-none'>{indexOfFirstTransaction + index + 1}</td>
                   <td className="transaction-history__currency-wrap">
                     <img src={"hive"} alt="" />
