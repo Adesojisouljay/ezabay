@@ -43,7 +43,7 @@ export const Dashboard = () => {
   const [buySellOpen, setBuySellOpen] = useState(false);
   const [openList, setOpenList] = useState(false);
   const [assetOpen, setAssetOpen] = useState(false)
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(true);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
@@ -167,9 +167,9 @@ export const Dashboard = () => {
                <div className="bal-show-wrap">
                 {showBalance ? ( <h3>********</h3> ) : (
                   <span>
-                  <span className="dashboard-currency-symbol">{selectedCurrency.sign}</span>
+                  <span className="dashboard-currency-symbol">{selectedCurrency?.sign}</span>
                   {/* Should be properly handles when we finailise other country currency */}
-                  {selectedCurrency.country === "Usa" ? formatNumberWithCommas(user?.nairaBalance / usdPrice)
+                  {selectedCurrency?.country === "Usa" ? formatNumberWithCommas(user?.nairaBalance / usdPrice)
                     : formatNumberWithCommas(user?.nairaBalance)}
                  </span>)}
                 </div>

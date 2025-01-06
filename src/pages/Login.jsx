@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { loginUser } from "../api/auth";
 import { loginStart, loginSuccess, loginFailure } from "../redux/userReducer";
+import { setCurrency } from "../redux/currencySlice";
 import { isTokenValid } from "../utils";
 import Logo from "../assets/Ezabay-st-logo.png";
 import Secure from "../assets/icons8-secure-64.png"
@@ -12,6 +13,7 @@ import Google from "../assets/google-1.jfif"
 import { Loader } from "../components/loader/Loader";
 import cat from "../assets/document_shape.webp";
 import eth from "../assets/eth-icon.webp";
+import { currenciesList } from "../vairables/protectedRoutes";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { PasswordReset } from "../components/modal/PasswordReset";
 import "./login.scss";
@@ -49,6 +51,7 @@ const Login = () => {
       const response = await loginUser(userData);
       if (response && response?.data?.success) {
         dispatch(loginSuccess(response.data));
+        dispatch(setCurrency(currenciesList[0]));
 
         window.location.href = "/dashboard";
         setLoading(false);

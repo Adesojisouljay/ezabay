@@ -6,7 +6,6 @@ import "./general.scss"
 
 export const GeneralDropdown = (props) => {
     const { items, handleOpenList, setSelectedItem, itemName, openList, selectLabal } = props;
-    console.log(itemName)
     const [searchQuery, setSearchQuery] = useState("");
 
     const filteredItems = items?.filter(item =>

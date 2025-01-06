@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/userReducer";
+import { clearCurrency } from "../../redux/currencySlice";
 import "./invalid-token-modal.scss"
 
 export const InvalidTokenModal = () => {
@@ -12,6 +13,7 @@ export const InvalidTokenModal = () => {
     
     const handleLogout = () => {
         dispatch(logout());
+        dispatch(clearCurrency());
         localStorage.removeItem("token")
         setShoeModal(!showModal);
         navigate('/login');

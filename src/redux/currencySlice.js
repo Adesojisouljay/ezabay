@@ -17,9 +17,12 @@ const currencySlice = createSlice({
     setCurrency: (state, action) => {
       state.selectedCurrency = action.payload;
     },
+    clearCurrency(state) {
+      state.selectedCurrency = null;
+    },
   },
 });
 
-export const { setCurrency } = currencySlice.actions;
+export const { setCurrency, clearCurrency } = currencySlice.actions;
 
 export const currencyReducer = currencySlice.reducer;
