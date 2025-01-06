@@ -25,7 +25,6 @@ export const Dashboard = () => {
   const user = useSelector((state) => state.ekzaUser?.user);
   const selectedCurrency = useSelector((state) => state.currency.selectedCurrency);
   const selectedCurrenc = useSelector((state) => state);
-  console.log(selectedCurrenc)
   const dispatch = useDispatch();
   const assets = user?.assets || [];
   // const isUsd = selectedCurrency === "USD";
@@ -47,7 +46,6 @@ export const Dashboard = () => {
   const [assetOpen, setAssetOpen] = useState(false)
   const [toggle, setToggle] = useState(true)
   const [trxListData, setTrxListData] = useState(null)
-  console.log(trxListData)
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
