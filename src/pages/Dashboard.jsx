@@ -255,12 +255,12 @@ export const Dashboard = () => {
               </div>
               </div>
               </div>
-              {/* <p style={{ marginBottom: 10 }}>
+              <p style={{ marginBottom: 10 }}>
                 Balance:{" "}
-                {selectedCurrency === "USD"
+                {selectedCurrency?.country === "Usa"
                   ? `$${formatNumberWithCommas(user?.totalUsdValue)}`
                   : `₦${formatNumberWithCommas(user?.totalNairaValue)}`}
-              </p> */}
+              </p>
 
               <div className="card-component-wrap">
                 {assets?.slice(0, 4).map((a) => (
@@ -274,12 +274,12 @@ export const Dashboard = () => {
                     <div>
                       <span className="asset-b">{a.balance.toFixed(3)}</span>
                     </div>
-                    {/* <span className="asset-v">
-                      {selectedCurrency === 'USD'
+                    <span className="asset-v">
+                      {selectedCurrency?.country === "Usa"
                         ? `$${formatNumberWithCommas(a.balance * a.usdValue)}`
                         : `₦${formatNumberWithCommas(a.balance * a.nairaValue)}`
                         }
-                    </span> */}
+                    </span>
                     <div>
                       <span className={`asset-percent ${a.percentageChange < 0 ? "red" : "green"}`}
                         style={{
