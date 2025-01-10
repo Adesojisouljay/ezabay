@@ -21,13 +21,13 @@ function RightNav({ rightNav, handleRightNav, handleLogout }) {
     { logo: <IoLogoSlack size={20} />, text: "Create Hive Account", path: "/hive-onboard" },
     { logo: <FaTachometerAlt size={20} />, text: "Spend HBD", path: "/spend-hbd" },
     { logo: <CgProfile size={20} />, text: "Profile", path: "/profile" },
-    ...(user && user?.role !== "user"
-      ? [
-          { logo: <PiHandDeposit size={20} />, text: "Deposit", path: "/fiat-deposit-action" },
-          { logo: <PiHandWithdraw size={20} />, text: "Withdrawal", path: "/fiat-withdrawal-action" },
-          { logo: <IoIosApps size={20} />, text: "Kyc Actions", path: "/manage-kyc" },
-        ]
-      : [])
+    // ...(user && user?.role !== "user"
+    //   ? [
+    //       { logo: <PiHandDeposit size={20} />, text: "Deposit", path: "/fiat-deposit-action" },
+    //       { logo: <PiHandWithdraw size={20} />, text: "Withdrawal", path: "/fiat-withdrawal-action" },
+    //       { logo: <IoIosApps size={20} />, text: "Kyc Actions", path: "/manage-kyc" },
+    //     ]
+    //   : [])
   ];
 
   return (
