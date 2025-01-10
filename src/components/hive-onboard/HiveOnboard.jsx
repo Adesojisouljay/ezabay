@@ -31,7 +31,7 @@ export const HiveOnboard = () => {
     }
   }, [username]);
 
-  const fee = 4.5;
+  const fee = 1;
 
   const getExistingHiveAccount = async () => {
     setLoading(true);
@@ -142,7 +142,7 @@ export const HiveOnboard = () => {
             const hiveAccountData = {
                 username,
                 email,
-                fee: feeType === "hive" ? fee : (hiveAsset.nairaValue * 4.5).toFixed(3),
+                fee: feeType === "hive" ? fee : (hiveAsset.nairaValue * fee).toFixed(3),
                 feeType,
                 accountKeys: newHiveAccount
             }
@@ -170,7 +170,7 @@ export const HiveOnboard = () => {
             </span>
             <form onSubmit={getkeys}>
               {loading && <Loader />}
-              <span>Fee: 4.5 Hive(₦{(hiveAsset.nairaValue * 4.5).toFixed(3)})</span>
+              <span>Fee: {fee} Hive(₦{(hiveAsset.nairaValue * fee).toFixed(3)})</span>
               <div className="onboard-form-group">
                 <input
                   type={"text"}
