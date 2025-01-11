@@ -1,13 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Wheel } from "react-custom-roulette";
+import { useDispatch } from 'react-redux';
 import { spinTheWheel } from '../api/spinner';
 import { useSelector } from 'react-redux';
+import { getUserProfile } from '../api/profile';
+// import spinnerSound from "../assets/spinner.mp3";
+import coinSpinner from "../assets/coinSpinner.mp3";
 import './spinner.scss';
 
 const Spinner = () => {
+  const dispatch = useDispatch()
   const wheelRef = useRef(null);
   const user = useSelector((state) => state.ekzaUser?.user);
-  console.log(user)
+  const audio = useRef(new Audio(coinSpinner));
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -33,6 +38,9 @@ const Spinner = () => {
   const handleSpinEnd = () => {
     setMustSpin(false);
     setIsSpinning(false);
+    audio.current.pause();
+    audio.current.currentTime = 0;
+    getUserProfile(dispatch);
   };
 
   const handleSpinClick = async () => {
@@ -40,6 +48,9 @@ const Spinner = () => {
 
     setIsSpinning(true);
     setMessage("Spinning...");
+
+    audio.current.loop = true;
+    audio.current.play();
 
     const response = await spinTheWheel();
     console.log(response);
