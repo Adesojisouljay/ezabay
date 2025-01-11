@@ -1,13 +1,23 @@
 import React, { useRef, useState } from 'react';
 import { Wheel } from "react-custom-roulette";
+import { spinTheWheel } from '../api/spinner';
+import { useSelector } from 'react-redux';
 import './spinner.scss';
 
 const Spinner = () => {
   const wheelRef = useRef(null);
+  const user = useSelector((state) => state.ekzaUser?.user);
+  console.log(user)
+
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [message, setMessage] = useState("Get Ready!");
+
   const prizes = [
-    "1 HIVE", "2 HIVE", "3 HIVE", "4 HIVE", "5 HIVE", 
-    "6 HIVE", "7 HIVE", "8 HIVE", "9 HIVE", "10 HIVE",
-    "OH! TRY AGAIN"
+    "10 HIVE", "200 HIVE", "30 HIVE", "40 HIVE", "50 HIVE", 
+    "60 HIVE", "70 HIVE", "80 HIVE", "90 HIVE", "100 HIVE",
+    "OH! Better luck next time! 🤞"
   ];
 
   const colors = [
@@ -15,45 +25,65 @@ const Spinner = () => {
     "#FFD700", "#FF8C00", "#00FFFF", "#8A2BE2", "#FF4500"
   ];
 
-  const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(0);
-  const [spinning, setSpinning] = useState(false);
-
   const data = prizes.map((prize, index) => ({
     option: prize,
     style: { backgroundColor: colors[index] }
   }));
 
-  const handleSpinClick = () => {
-    if (!spinning) {
-      const newPrizeNumber = Math.floor(Math.random() * data.length);
-      setPrizeNumber(newPrizeNumber);
-      setMustSpin(true);
-      setSpinning(true);
-    }
-  };
-
   const handleSpinEnd = () => {
     setMustSpin(false);
-    setSpinning(false);
+    setIsSpinning(false);
+  };
+
+  const handleSpinClick = async () => {
+    if (isSpinning) return;
+
+    setIsSpinning(true);
+    setMessage("Spinning...");
+
+    const response = await spinTheWheel();
+    console.log(response);
+
+    if (response.success) {
+      const index = prizes.indexOf(response.prize);
+      setPrizeNumber(index !== -1 ? index : prizes.length - 1);
+      setMustSpin(true);
+      setMessage(response.prize === "OH! Better luck next time! 🤞" 
+        ? response.prize 
+        : `You won: ${response.prize}`);
+    } else {
+      setMessage("Spin failed.");
+      setIsSpinning(false);
+    }
   };
 
   return (
     <div className="spinner-wrap">
-      <div className="spinner-container">
-        <div className="spinner-wheel" ref={wheelRef}>
-          <Wheel
-            mustStartSpinning={mustSpin}
-            prizeNumber={prizeNumber}
-            data={data}
-            onStopSpinning={handleSpinEnd}
-          />
+      <div className="spinner-main-container">
+        <div className='spinner-top-wrapper'>
+          <div className="spinner-data-wrapper">
+            <span>Ezapoint Balance: {user?.ezaPoints?.balance}</span>
+            <span>Total Hive Won: {user?.ezaPoints?.balance}</span>
+            <span>Total Spins: 3000</span>
+            <span>Pending Rewards: {user.pendingSpinHiveReward}</span>
+          </div>
+          <button className="claim-btn">Claim pending reward</button>
         </div>
-        {!spinning && (
-          <button className='spinner-btn' onClick={handleSpinClick}>Spin</button>
-        )}
-        {spinning && <p className="spinner-result">Spinning...</p>}
-        {!spinning && <p className="spinner-result">{`You won: ${prizes[prizeNumber]}`}</p>}
+        <div className="spinner-container">
+          <div className="spinner-wheel" ref={wheelRef}>
+            <Wheel
+              mustStartSpinning={mustSpin}
+              prizeNumber={prizeNumber}
+              data={data}
+              onStopSpinning={handleSpinEnd}
+            />
+          </div>
+          {!isSpinning && (
+            <button className='spinner-btn' onClick={handleSpinClick}>Spin</button>
+          )}
+          {isSpinning && <p className="spinner-result">Spinning...</p>}
+          {!isSpinning && <p className="spinner-result">{message}</p>}
+        </div>
       </div>
     </div>
   );

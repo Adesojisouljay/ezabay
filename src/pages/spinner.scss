@@ -4,73 +4,114 @@
   align-items: center;
   height: 100vh;
   width: 100%;
+  position: relative;
 
-  .spinner-container {
-    position: relative;
-    width: 400px;
-    height: 400px;
+  .spinner-main-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    position: absolute;
+    top: 0;
+    gap: 50px;
 
-    .spinner-wheel {
-      position: absolute;
-
-      .number {
-        position: absolute;
-        width: 50%;
-        height: 50%;
-        background: var(--clr);
-        transform-origin: bottom right;
-        transform: rotate(calc(45deg * var(--i)));
-        clip-path: polygon(0 0, 56% 0, 100% 100%, 0 56%);
+    .spinner-top-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      .spinner-data-wrapper{
+        background-color: #28163a;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        user-select: none;
-        cursor: pointer;
-
-        span {
-          position: relative;
-          transform: rotate(45deg);
-          font-size: 2em;
-          font-weight: 700;
-          color: #fff;
-          text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.15);
-
-          &::after {
-            content: 'X';
-            position: absolute;
-            font-size: 0.75em;
-            font-weight: 500;
-          }
+        justify-content: space-between;
+        padding: 30px;
+        border-radius: 30px;
+        width: 100%;
+        gap: 50px;
+  
+        span{
+          font-size: 20px;
         }
+      }
+
+      .claim-btn{
+        padding: 15px;
+        background-color: #28163a;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 30px;
+        cursor: pointer;
       }
     }
 
-    .spinner-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.5em;
-      background-color: #62204a;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .spinner-result {
-      margin-top: 450px;
-      font-size: 2em;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.15);
+    .spinner-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+      .spinner-wheel {
+        position: absolute;
+  
+        .number {
+          position: absolute;
+          width: 50%;
+          height: 50%;
+          background: var(--clr);
+          transform-origin: bottom right;
+          transform: rotate(calc(45deg * var(--i)));
+          clip-path: polygon(0 0, 56% 0, 100% 100%, 0 56%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          user-select: none;
+          cursor: pointer;
+  
+          span {
+            position: relative;
+            transform: rotate(45deg);
+            font-size: 2em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.15);
+  
+            &::after {
+              content: 'X';
+              position: absolute;
+              font-size: 0.75em;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+  
+      .spinner-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5em;
+        background-color: #62204a;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        z-index: 10;
+      }
+  
+      .spinner-result {
+        margin-top: 500px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 3px 5px 2px rgba(0, 0, 0, 0.15);
+      }
     }
   }
+
 }
