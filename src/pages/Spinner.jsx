@@ -20,7 +20,7 @@ const Spinner = () => {
   const [message, setMessage] = useState("Get Ready!");
 
   const prizes = [
-    "10 HIVE", "200 HIVE", "30 HIVE", "40 HIVE", "50 HIVE", 
+    "10 HIVE", "20 HIVE", "30 HIVE", "40 HIVE", "50 HIVE", 
     "60 HIVE", "70 HIVE", "80 HIVE", "90 HIVE", "100 HIVE",
     "OH! Better luck next time! 🤞"
   ];
