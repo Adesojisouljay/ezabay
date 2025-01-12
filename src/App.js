@@ -87,7 +87,7 @@ function App() {
             {/* COMMENT ALL OUT FOR TESTING SAKE */}
             {/* <Route path="/controller" element={<Admin/>}/> */}
             {/* <Route path="/test" element={<Pagetest />} /> */}
-            {/* <Route path="spinner" element={<Spinner />} /> */}
+            <Route path="spinner" element={<Spinner />} />
             {/* <Route path="/kyc" element={<Kyc />} /> */}
             {/* <Route path="/manage-kyc" element={<KYCManagement />} /> */}
             {/* <Route path="/merchant-action" element={<MerchantAction />} /> */}
