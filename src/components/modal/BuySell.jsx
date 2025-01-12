@@ -14,6 +14,8 @@ import nigeria from "../../assets/nigria.png"
 import { TbArrowsExchange2 } from "react-icons/tb";
 import { IoIosArrowBack, IoIosArrowRoundBack } from 'react-icons/io';
 import { Dropdown } from '../dropdown/Dropdown';
+import Spinner from '../spinner/Spinner';
+
 
 export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactionType,}) => {
 
@@ -30,6 +32,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
   const [message, setMessage] = useState("");
   const [conversionResult, setConversionResult] = useState(null);
   const [step, setStep] = useState(1);
+  const [disable, setDisable] = useState(false)
   
   const abortControllerRef = useRef(null);
 
@@ -90,6 +93,9 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
 
   const handleTransaction = async (e) => {
     e.preventDefault();
+    setDisable(true)
+    
+
 
     if (!amount || isNaN(amount)) {
       setMessage("Please enter a valid amount");
@@ -138,6 +144,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
       setMessage(error.message || "An error occurred during the transaction");
     } finally {
       setIsLoading(false);
+      setDisable(false)
     }
   };
 
@@ -323,7 +330,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
             <div className="review-buy-sell">
               <div className="review-box-wrap">
                 <div className="box-left">
-                  <span>Converting</span>
+                {transactionType === "sell" ? <span>You get</span>: <span>Converting</span> }
                   <div className="review-coin-wrap">
                     <img src={nigeria} alt="" />
                     {/* <span>{conversionResult?.convertedNairaAmount}</span> */}
@@ -339,7 +346,7 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
                 </div>
                 </div>
                 <div className="box-left">
-                  <span>You get</span>
+                  {transactionType === "sell" ? <span>Converting</span> : <span>You get</span>}
                   <div className="review-coin-wrap">
                     <img src={currency.image} alt="" />
                     <span>{conversionResult?.convertedCryptoAmount.split(' ')[0]}</span>
@@ -401,7 +408,9 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
 
               <div className="buy-btn-wrap">
                 {/* <button onClick={()=> setStep(1)} className='back'>Back</button> */}
-                <button onClick={handleTransaction}>{transactionType === "buy" ? "Buy" : "Sell"}</button>
+                <button onClick={handleTransaction} disabled={disable} className={disable? "grey" :""} >
+                {disable ? <Spinner /> : (transactionType === "buy" ? "Buy" : "Sell") }
+                </button>
               </div>
             </div>
           )}

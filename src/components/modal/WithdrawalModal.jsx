@@ -3,6 +3,7 @@ import { processHiveWithdrawal, requestToken, processCryptoWithdrawal, getTransa
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { Dropdown } from '../dropdown/Dropdown';
 import './withdraw-modal.scss';
+import Spinner from '../spinner/Spinner';
 
 export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
   const [memo, setMemo] = useState('');
@@ -14,6 +15,8 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
   const [step, setStep] = useState(1);
   const [fee, setFee] = useState(0.000)
   const [disableBtn, setDisableBtn] = useState(false)
+  const [spinner, setSpinner] = useState(false)
+  const [disableBtn2, setDisableBtn2] =useState(false)
 
   
   const [selectedAsset, setSelectedAsset] = useState(assets[0]);
@@ -33,15 +36,18 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
   }
 
   const handleHiveWithdrawal = async () => {
+    setDisableBtn2(true)
 
     try {
       const withdrawalData = { to, amount, currency: selectedAsset.currency, memo, withdrawalToken };
       const result = await processHiveWithdrawal(withdrawalData);
       setMessage(result.message);
       setStep(3)
+      setDisableBtn2(true)
     } catch (error) {
       console.log(error);
       setMessage(error.message);
+      setDisableBtn2(false)
     }
   };
 
@@ -59,6 +65,16 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
 
   const getToken = async () => {
     setDisableBtn(true)
+    setSpinner(true)
+    
+     // Validation logic
+  if (!amount || !to) {
+    setMessage("Both Address and Amount fields are required");
+    setDisableBtn(false); 
+    setSpinner(false); 
+    return; 
+  }
+  setMessage("");
 
     try {
       console.log(disableBtn)
@@ -69,6 +85,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
     } catch (error) {
       console.log(error)
       setDisableBtn(false)
+      setSpinner(false)
     }
   }
 
@@ -184,7 +201,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
                 placeholder="Enter memo"
               />
             </>}
-            <button className="withdraw-btn" onClick={getToken} disabled={disableBtn}>Withdraw</button>
+            <button className="withdraw-btn" onClick={getToken} disabled={disableBtn}>{!spinner ? "Withdraw" : <Spinner /> }</button>
             </> : <div className="withdrawal-info-wrapper">
             <h3 className='warning'>{selectedAsset?.currency}({selectedAsset?.symbol?.toUpperCase()}) withdrawal is coming soon...</h3>
             <span className='withdrawal-address-info-el'>No address/network available for this asset yet</span>
@@ -202,7 +219,7 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
             placeholder="Enter withdrawal token"
           />
           <div className="checktoken">Check email for Withdrawal token.</div>
-          <button className="withdraw-btn" onClick={handleGeneralWithdrawal}>Withdraw</button>
+          <button className="withdraw-btn" disabled={disableBtn2} onClick={handleGeneralWithdrawal}>{disableBtn2 ? <Spinner/> :"Withdraw"}</button>
         </div>}
         {step === 3 && <div className="">
          <h4>Withdrawal processed successfully</h4>
