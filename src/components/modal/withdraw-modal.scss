@@ -120,10 +120,14 @@
       color: #fff;
       font-size: 16.5px;
       background-color: rgb(28 100 224 );
-      // background-color: rgb(23, 57, 102);
-      // background: linear-gradient(127deg, hsla(0, 0%, 100%, 0.16) 17.35%, hsla(0, 0%, 85%, 0.04) 76.2%);
+      width: 200px;
       cursor: pointer;
+      &:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+      }
       @include respond(phone) {
+        margin-top: 5px;
         font-size: 14px;
       }
   }
