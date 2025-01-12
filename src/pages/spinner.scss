@@ -115,3 +115,42 @@
   }
 
 }
+
+///////MIGHT NOT BE NEEDED ACTUALLY
+.teddy-bear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  animation: bounce 2s ease infinite;
+
+  .teddy-bear-img {
+    width: 100px;
+    height: 100px;
+    transition: transform 0.5s ease;
+  }
+
+  &.winning {
+    .teddy-bear-img {
+      transform: rotate(360deg);
+    }
+  }
+
+  &.losing {
+    .teddy-bear-img {
+      transform: scale(1.2);
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
