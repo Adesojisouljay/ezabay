@@ -408,7 +408,12 @@ export const  BuySell = ({ isOpen,onClose,assets, transactionType, setTransactio
 
               <div className="buy-btn-wrap">
                 {/* <button onClick={()=> setStep(1)} className='back'>Back</button> */}
-                <button onClick={handleTransaction} disabled={disable} className={disable? "grey" :""} >
+                <button
+                  style={{cursor: disable ? "not-allowed" : "pointer"}}
+                  onClick={handleTransaction} 
+                  disabled={disable} 
+                  // className={disable ? "grey" :""} 
+                >
                 {disable ? <Spinner /> : (transactionType === "buy" ? "Buy" : "Sell") }
                 </button>
               </div>
