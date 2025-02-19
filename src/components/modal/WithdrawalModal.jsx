@@ -107,6 +107,14 @@ export const WithdrawalModal = ({ isOpen, onClose, assets, user }) => {
     }
 };
 
+const handleInternalTransfer = async () => {
+  try {
+    console.log("processing internal transfer")
+  } catch (error) {
+   console.log(error) 
+  }
+}
+
   return (
     <div className={`fadded-container modal-overlay ${isOpen ? 'open' : ''}`} >
     <div className={`modal-overlay  ${isOpen ? 'open' : ''}`}  onClick={onClose}> </div>
